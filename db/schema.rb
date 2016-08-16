@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816152355) do
+ActiveRecord::Schema.define(version: 20160816202223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,21 +38,20 @@ ActiveRecord::Schema.define(version: 20160816152355) do
   create_table "plans", force: :cascade do |t|
     t.text     "overview"
     t.string   "category"
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "title"
-    t.index ["user_id"], name: "index_plans_on_user_id", using: :btree
   end
 
   create_table "subscriptions", force: :cascade do |t|
     t.text     "expectations"
-    t.integer  "starting_weight"
     t.integer  "user_id"
     t.integer  "plan_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "rating"
+    t.integer  "start_weight"
+    t.decimal  "start_bmi"
     t.index ["plan_id"], name: "index_subscriptions_on_plan_id", using: :btree
     t.index ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
   end
@@ -66,11 +65,11 @@ ActiveRecord::Schema.define(version: 20160816152355) do
     t.datetime "updated_at",      null: false
     t.integer  "feet"
     t.integer  "inches"
+    t.decimal  "start_bmi"
   end
 
   add_foreign_key "check_ins", "users"
   add_foreign_key "logs", "users"
-  add_foreign_key "plans", "users"
   add_foreign_key "subscriptions", "plans"
   add_foreign_key "subscriptions", "users"
 end

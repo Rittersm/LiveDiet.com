@@ -1,13 +1,16 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :plans
-  has_many :subscriptions
-  has_many :logs
-  has_many :check_ins
+  has_many :subscriptions, dependent: :destroy
+  has_many :logs, dependent: :destroy
+  has_many :check_ins, dependent: :destroy
+
+  before_save :starting_bmi
 
   validates :username, presence: true, uniqueness: true, format: {:with => /\A[a-zA-Z0-9\-_]+\z/}
   validates :email, presence: true, uniqueness: true, format: {:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/}
   validates :feet, presence: true
+  validates :inches, presence: true
   validates :starting_weight, presence: true
 
   def kg
@@ -15,15 +18,31 @@ class User < ApplicationRecord
   end
 
   def meters
-    ((feet * 12) + inches) * 0.025
+    (((feet * 12) + inches) * 0.025) ** 2
   end
 
   def starting_bmi
-    (kg/meters ** 2).round(2)
+    self.start_bmi = (kg/meters).round(2)
   end
 
   def current_plan
     subscriptions.last.plan
+  end
+
+  def current_weight
+    if check_ins.any?
+      check_ins.last.weight
+    else
+      starting_weight
+    end
+  end
+
+  def current_bmi
+    if check_ins.any?
+      check_ins.last.bmi
+    else
+      start_bmi
+    end
   end
 
 end

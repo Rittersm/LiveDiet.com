@@ -2,16 +2,23 @@ class Subscription < ApplicationRecord
   belongs_to :user
   belongs_to :plan
 
-  def meters
-    ((user.feet * 12) + user.inches) * 0.025
-  end
+  before_save :set_starting_weight
+  before_save :set_starting_bmi
 
-  def kg
-    starting_weight/2.2046
+  def starting_weight
+    user.current_weight
   end
 
   def starting_bmi
-    (kg/meters ** 2).round(2)
+    user.current_bmi.round(2)
+  end
+
+  def set_starting_weight
+    self.start_weight = starting_weight
+  end
+
+  def set_starting_bmi
+    self.start_bmi = starting_bmi
   end
 
 end
