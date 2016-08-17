@@ -26,6 +26,16 @@ class LogsController < ApplicationController
     @log.destroy
   end
 
+  def index
+    if params[:id] == 'me'
+      @log = current_user.logs
+      render json: @sub, serializer: LogSerializer
+    else
+      @log = User.logs
+      render json: @sub, serializer: LogSerializer
+    end
+  end
+
   private
 
   def log_params

@@ -26,6 +26,16 @@ class CheckInsController < ApplicationController
     @checkin.destroy
   end
 
+  def index
+    if params[:id] == 'me'
+      @checkin = current_user.check_ins
+      render json: @sub, serializer: CheckInSerializer
+    else
+      @checkin = User.check_ins
+      render json: @sub, serializer: CheckInSerializer
+    end
+  end
+
   private
 
   def checkin_params

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :plans, only: [:create, :index, :show, :update] do
     resources :subscriptions, only: [:create, :destroy, :show, :index]
   end

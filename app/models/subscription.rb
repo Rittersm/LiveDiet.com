@@ -10,7 +10,7 @@ class Subscription < ApplicationRecord
   end
 
   def starting_bmi
-    user.current_bmi.round(2)
+    user.current_bmi
   end
 
   def set_starting_weight

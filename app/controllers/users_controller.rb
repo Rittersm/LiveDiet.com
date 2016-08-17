@@ -27,6 +27,11 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
+  def index
+    @user = User.all
+    render json: @user, serializer: UserSerializer
+  end
+
   def show
     @user = User.find_by(username: params[:username])
     render json: @user, serializer: UserSerializer

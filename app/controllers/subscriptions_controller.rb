@@ -18,7 +18,17 @@ class SubscriptionsController < ApplicationController
 
   def show
     @sub = Subscription.find(params[:id])
-    render json: @sub, serializer: SubscriptionsSerializer
+    render json: @sub, serializer: SubscriptionSerializer
+  end
+
+  def index
+    if params[:id] == 'me'
+      @sub = current_user.subscriptions
+      render json: @sub, serializer: SubscriptionSerializer
+    else
+      @sub = User.subscriptions
+      render json: @sub, serializer: SubscriptionSerializer
+    end
   end
 
   private
