@@ -1,0 +1,9 @@
+<%= form_for :user, :url => login_path do |f| %>
+  <fieldset class="form-group">
+    <%= f.text_field :username, :class => "form-control", :placeholder => "Username", :value => nil %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.password_field :password, :class => "form-control", :placeholder => "Password" %>
+  </fieldset>
+    <%= f.submit "Login", :class => "btn btn-primary btn-block submit-button" %>
+<% end %>

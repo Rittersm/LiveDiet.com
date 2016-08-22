@@ -1,0 +1,6 @@
+<%= form_for [current_user, @newcheckin] do |f| %>
+  <fieldset class="form-group">
+    <%= f.text_field :weight, :class => "form-control", :placeholder => "Check-In Weight:" %>
+  </fieldset>
+  <%= f.submit :class => "btn btn-primary btn-block submit-button" %>
+<% end %>

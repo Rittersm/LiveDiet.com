@@ -3,12 +3,13 @@ class CheckInsController < ApplicationController
   before_action :require_user, only: [:create, :update, :destroy]
 
   def create
-    @checkin = current_user.check_ins.new(checkin_params)
-    @checkin.plan = current_user.current_plan
-    if @checkin.save
-      render json: @checkin, status: :created
+    @newcheckin = CheckIn.new(checkin_params)
+    @newcheckin.user = current_user
+    @newcheckin.subscription = current_user.subscriptions.last
+    if @newcheckin.save
+      render json: @newcheckin, status: :created
     else
-      render json: @checkin.errors, status: :unprocessable_entity
+      render json: @newcheckin.errors, status: :unprocessable_entity
     end
   end
 
@@ -39,7 +40,7 @@ class CheckInsController < ApplicationController
   private
 
   def checkin_params
-    params.permit(:weight)
+    params.require(:check_in).permit(:weight)
   end
 
 end

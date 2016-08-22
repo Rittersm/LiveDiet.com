@@ -25,8 +25,12 @@ class User < ApplicationRecord
     self.start_bmi = (kg/meters).round(2)
   end
 
+  def current_subscription
+    Subscription.where(user: self).last
+  end
+
   def current_plan
-    subscriptions.last.plan
+    current_subscription&.plan
   end
 
   def current_weight
@@ -39,7 +43,7 @@ class User < ApplicationRecord
 
   def current_bmi
     if check_ins.any?
-      check_ins.last.bmi
+      check_ins.last.new_bmi
     else
       start_bmi
     end

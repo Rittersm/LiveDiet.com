@@ -1,0 +1,6 @@
+<%= form_for [plan, @newsub] do |f| %>
+  <fieldset class="form-group">
+    <%= f.text_area :expectations, :class => "form-control", :placeholder => "Expectations:" %>
+  </fieldset>
+  <%= f.submit :class => "btn btn-primary submit-button" %>
+<% end %>

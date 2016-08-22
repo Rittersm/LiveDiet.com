@@ -1,6 +1,8 @@
 class Subscription < ApplicationRecord
   belongs_to :user
   belongs_to :plan
+  belongs_to :rating
+  has_many :check_ins
 
   before_save :set_starting_weight
   before_save :set_starting_bmi

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LiveDietCom</title>
+    <title>LiveDiet</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,117 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/plans">
+            <%= image_tag "logo.png", class: "img-responsive"%>
+          </a>
+        </div>
+        <a class="navbar-logo" href="/plans">
+          <%= image_tag "text.png", class: "img-responsive" %>
+        </a>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="col-xs-9"><%= yield %></div>
+      <div class="col-xs-3 sidebar">
+        <% if current_user %>
+          <h4 class="text-center">Welcome, <%= current_user.username %></h4>
+          <hr>
+          <% if current_user.current_plan %>
+          <div class="row">
+            <h4 class="col-xs-9">Current Plan: <%= current_user.current_plan.title %></h4>
+            <div class="col-xs-3">
+              <%= button_to "Unsubscribe", plan_subscription_path(current_user.current_plan, current_user.current_subscription), method: :delete, :class => "btn btn-xs btn-primary" %>
+            </div>
+          </div>
+          <% else %>
+            <h4 class="text-center">Current Plan: N/A</h4>
+          <% end %>
+          <div class="well well-sm sidebar_table">
+            <ul>
+              <ul class="list-inline row list_head">
+                <li class="col-xs-4 text-left">Check-in Date</li>
+                <li class="col-xs-4 text-center">Check-in Weight</li>
+                <li class="col-xs-4 text-right">Check-in BMI</li>
+              </ul>
+              <% current_user.check_ins.each do |check| %>
+                <ul class="list-inline row">
+                  <li class="col-xs-4 text-left"><%= check.created_at.strftime("%b %d, %Y") %></li>
+                  <li class="col-xs-4 text-center"><%= check.weight %></li>
+                  <li class="col-xs-4 text-center"><%= check.new_bmi %></li>
+                </ul>
+              <% end %>
+            </ul>
+          </div>
+          <div class="well well-sm">
+            <%= line_chart current_user.check_ins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, height: "200px", discrete: true %>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">
+              <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#PlanModal">Create Plan</button>
+            </div>
+            <div class="col-xs-4">
+              <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#LogModal">Daily Log</button>
+            </div>
+            <div class="col-xs-4">
+              <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#CheckinModal">Check-in</button>
+            </div>
+          </div>
+          <br>
+          <div class="col-xs-10 col-xs-offset-1">
+            <%= button_to "Logout", logout_path, method: :delete, :class => "btn btn-primary btn-block" %>
+          </div>
+        <% else %>
+          <h4>Login:</h4>
+          <%= render partial: "layouts/login" %>
+          <br>
+          <h4>Register:</h4>
+          <%= render partial: "layouts/user", locals: {user: @user} %>
+        <% end %>
+      </div>
+    </div>
+    <% if current_user %>
+      <div class="modal fade" id="PlanModal" tabindex="-1" role="dialog" aria-labelledby="PlanModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Create New Plan:</h4>
+            </div>
+            <div class="modal-body">
+              <%= render partial: "plans/newplan" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="LogModal" tabindex="-1" role="dialog" aria-labelledby="LogModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">New Log Entry:</h4>
+            </div>
+            <div class="modal-body">
+              <%= render partial: "logs/newlog" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="CheckinModal" tabindex="-1" role="dialog" aria-labelledby="CheckinModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">New Check-In:</h4>
+            </div>
+            <div class="modal-body">
+              <%= render partial: "check_ins/newcheckin" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </body>
 </html>

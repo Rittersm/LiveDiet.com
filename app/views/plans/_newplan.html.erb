@@ -1,0 +1,12 @@
+<%= form_for @newplan do |f| %>
+  <fieldset class="form-group">
+    <%= f.text_field :title, :class => "form-control", :placeholder => "Plan Title" %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.collection_select :category_id, Category.order(:id), :id, :title, {include_blank: true}, {:class => "form-control"} %>
+  </fieldset>
+  <fieldset class="form-group">
+    <%= f.text_area :overview, :class => "form-control", :placeholder => "Plan Overview:" %>
+  </fieldset>
+  <%= f.submit :class => "btn btn-primary btn-block submit-button" %>
+<% end %>

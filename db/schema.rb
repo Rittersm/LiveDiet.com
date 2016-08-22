@@ -10,18 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816202223) do
+ActiveRecord::Schema.define(version: 20160822164855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "categories", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "check_ins", force: :cascade do |t|
     t.integer  "weight"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "plan_id"
-    t.index ["plan_id"], name: "index_check_ins_on_plan_id", using: :btree
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "subscription_id"
+    t.decimal  "new_bmi"
+    t.index ["subscription_id"], name: "index_check_ins_on_subscription_id", using: :btree
     t.index ["user_id"], name: "index_check_ins_on_user_id", using: :btree
   end
 
@@ -37,10 +44,17 @@ ActiveRecord::Schema.define(version: 20160816202223) do
 
   create_table "plans", force: :cascade do |t|
     t.text     "overview"
-    t.string   "category"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "title"
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_plans_on_category_id", using: :btree
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "title"
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -49,10 +63,11 @@ ActiveRecord::Schema.define(version: 20160816202223) do
     t.integer  "plan_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.integer  "rating"
     t.integer  "start_weight"
     t.decimal  "start_bmi"
+    t.integer  "rating_id"
     t.index ["plan_id"], name: "index_subscriptions_on_plan_id", using: :btree
+    t.index ["rating_id"], name: "index_subscriptions_on_rating_id", using: :btree
     t.index ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
   end
 

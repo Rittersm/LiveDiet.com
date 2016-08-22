@@ -1,0 +1,13 @@
+<br>
+<div>
+  <%= render @plan %>
+</div>
+<hr>
+<% if @subscription.any? %>
+  <h2>Subscribers:</h2>
+  <div>
+    <%= render @subscription %>
+  </div>
+<% else %>
+  <h2>Subscribers: NONE</h2>
+<% end %>

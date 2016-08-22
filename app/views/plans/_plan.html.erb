@@ -1,0 +1,63 @@
+<div class="well well-lg" id="<%= plan.id %>">
+  <div class="row">
+    <div class="col-xs-6">
+      <a class="col-xs-12" href="/plans/<%= plan.id %>">
+        <h2><%= plan.title %></h2>
+      </a>
+      <div class="col-xs-12">
+        <p><%= plan.overview %></p>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <% if plan.check_ins.any? %>
+        <h4 class="text-center">Average Check-Ins</h4>
+        <%= line_chart plan.avg_change, min: nil, max: nil, discrete: true %>
+      <% else %>
+        <h4 class="text-center">No Data Available</h4>
+      <% end %>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-xs-4">
+      <h4>Rating: <%= plan.rating %>/5</h4>
+    </div>
+    <div class="col-xs-4">
+      <h4>Category: <%= plan.category.title %></h4>
+    </div>
+    <div class="col-xs-3">
+      <h4>Total Subscribers: <%= plan.subscriptions.count %></h4>
+    </div>
+    <div class="col-xs-1">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SubscribeModal<%= plan.id %>">Subscribe</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="SubscribeModal<%= plan.id %>" tabindex="-1" role="dialog" aria-labelledby="SubscribeModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Subscribe to <%= plan.title %></h4>
+      </div>
+      <div class="modal-body">
+        <% if current_user %>
+          <%= render partial: 'subscriptions/newsub', locals: {plan: plan} %>
+        <% else %>
+          <h4>You must be logged in to subscribe to a plan</h4>
+          <hr>
+          <h5>Login:</h5>
+          <%= render partial: 'layouts/login' %>
+          <br>
+          <h5>Register:</h5>
+          <%= render partial: 'layouts/user' %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

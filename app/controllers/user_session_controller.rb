@@ -3,11 +3,12 @@ class UserSessionController < ApplicationController
   before_action :require_user, only: [:destroy]
 
   def create
-    @user = User.find_by(username: params[:username])
+    @user = User.find_by(username: params[:user][:username])
     if @user
-      if @user.authenticate(params[:password])
+      if @user.authenticate(params[:user][:password])
         session[:username] = @user.username
-        render json: @user, serializer: UserSerializer
+        # render json: @user, serializer: UserSerializer
+        redirect_to root_path
       else
         render json: {error: "Incorrect Password"}, status: :unprocessable_entity
       end
@@ -18,6 +19,7 @@ class UserSessionController < ApplicationController
 
   def destroy
     session[:username] = nil
+    redirect_to root_path
   end
 
 end

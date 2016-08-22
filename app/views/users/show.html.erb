@@ -1,0 +1,38 @@
+<br>
+  <%= render @user %>
+<div class="row">
+  <h2 class="col-xs-5">Check-in Table:</h2>
+  <h2 class="col-xs-5 col-xs-offset-1">Check-in Graphs:</h2>
+</div>
+<div class="row">
+  <div class="col-xs-5 well well-lg checkin_well">
+    <ul>
+      <ul class="list-inline row list_head">
+        <li class="col-xs-4 text-left">Check-in Date</li>
+        <li class="col-xs-4 text-center">Check-in Weight</li>
+        <li class="col-xs-4 text-right">Check-in BMI</li>
+      </ul>
+      <% @checkins.each do |check| %>
+        <ul class="list-inline row">
+          <li class="col-xs-4 text-left"><%= check.created_at.strftime("%b %d, %Y") %></li>
+          <li class="col-xs-4 text-center"><%= check.weight %></li>
+          <li class="col-xs-4 text-center"><%= check.new_bmi %></li>
+        </ul>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-xs-5 col-xs-offset-1 well well-lg">
+    <ul class="nav nav-tabs nav-justified categories">
+      <li><a href="#">Weight</a></li>
+      <li><a href="#">B.M.I</a></li>
+    </ul>
+    <hr>
+    <%= line_chart @checkins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, discrete: true %>
+    <%= line_chart @checkins.group_by_week(:created_at).sum(:new_bmi), min: nil, max: nil, discrete: true %>
+  </div>
+</div>
+<br>
+<div class="row">
+  <h2 class="col-xs-5">Logs:</h2>
+</div>
+  <%= render @logs %>

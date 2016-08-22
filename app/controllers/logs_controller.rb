@@ -3,12 +3,13 @@ class LogsController < ApplicationController
   before_action :require_user, only: [:create, :update, :destroy]
 
   def create
-    @log = current_user.logs.new(log_params)
-    @log.plan = current_user.current
-    if @log.save
-      render json: @log, status: :created
+    @newlog = Log.new(log_params)
+    @newlog.user = current_user
+    @newlog.plan = current_user.current_plan
+    if @newlog.save
+      render json: @newlog, status: :created
     else
-      render json: @log.errors, status: :unprocessable_entity
+      render json: @newlog.errors, status: :unprocessable_entity
     end
   end
 
@@ -39,7 +40,7 @@ class LogsController < ApplicationController
   private
 
   def log_params
-    params.permit(:daily_overview)
+    params.require(:log).permit(:daily_overview)
   end
 
 end

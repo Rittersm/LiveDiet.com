@@ -1,0 +1,6 @@
+<%= form_for [current_user, @newlog] do |f| %>
+  <fieldset class="form-group">
+    <%= f.text_area :daily_overview, :class => "form-control", :placeholder => "Log Entry:" %>
+  </fieldset>
+  <%= f.submit :class => "btn btn-primary btn-block submit-button" %>
+<% end %>

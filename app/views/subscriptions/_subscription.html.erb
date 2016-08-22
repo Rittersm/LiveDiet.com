@@ -1,0 +1,31 @@
+<div class="well well-lg">
+  <div class="row">
+    <div class="col-xs-6">
+      <a class="col-xs-12" href="/users/<%= subscription.user.id %>">
+        <h2><%= subscription.user.username %></h2>
+      </a>
+      <div class="col-xs-12">
+        <p><%= subscription.expectations %></p>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <%= line_chart subscription.user.check_ins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, discrete: true %>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-xs-4">
+      <% if subscription.rating %>
+        <h4>Rating: <%= subscription.rating.value %>/5</h4>
+      <% else %>
+        <h4>Rating: N/A</h4>
+      <% end %>
+    </div>
+    <div class="col-xs-4">
+      <h4>Start Weight: <%= subscription.start_weight %></h4>
+    </div>
+    <div class="col-xs-3">
+      <h4>Starting BMI: <%= subscription.start_bmi %></h4>
+    </div>
+  </div>
+</div>

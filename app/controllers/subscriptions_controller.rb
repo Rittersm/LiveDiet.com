@@ -3,17 +3,20 @@ class SubscriptionsController < ApplicationController
   before_action :require_user, only: [:create, :destroy]
 
   def create
-    @sub = current_user.subscriptions.new(subscription_params)
-    if @sub.save
-      render json: @sub, status: :created
+    @plan = Plan.find(params[:plan_id])
+    @newsub = current_user.subscriptions.new(subscription_params)
+    @newsub.plan = @plan
+    if @newsub.save
+      render json: @newsub, status: :created
     else
-      render json: @sub.errors, status: :unprocessable_entity
+      render json: @newsub.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
     @sub = current_user.subscriptions.find(params[:id])
     @sub.destroy
+    redirect_to root_page
   end
 
   def show
@@ -34,7 +37,7 @@ class SubscriptionsController < ApplicationController
   private
 
   def subscription_params
-    params.permit(:expectations, :rating, :plan_id)
+    params.require(:subscription).permit(:expectations, :rating)
   end
 
 end

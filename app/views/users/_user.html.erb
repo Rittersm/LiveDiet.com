@@ -1,0 +1,33 @@
+<div class="well well-lg">
+  <div class="row">
+      <h2><%= user.username %></h2>
+    </a>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <h4>Height: <%= user.feet %>'<%= user.inches %>"</h4>
+    </div>
+    <div class="col-xs-4">
+      <h4>Start Weight: <%= user.starting_weight %></h4>
+    </div>
+    <div class="col-xs-4">
+      <h4>Start BMI: <%= user.start_bmi %></h4>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-xs-4">
+      <% if user.current_plan %>
+        <h4>Current Plan: <%= user.current_plan.title %></h4>
+      <% else %>
+        <h4>Current Plan: N/A</h4>
+      <% end %>
+    </div>
+    <div class="col-xs-4">
+      <h4>Current Weight: <%= user.current_weight %></h4>
+    </div>
+    <div class="col-xs-4">
+      <h4>Current BMI: <%= user.current_bmi %></h4>
+    </div>
+  </div>
+</div>

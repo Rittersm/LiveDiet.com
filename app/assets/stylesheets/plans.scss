@@ -1,3 +1,114 @@
 // Place all the styles related to the Plans controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$dark_blue: #082152;
+$true_blue: #0964D9;
+$usaf_blue: #004B91;
+$sky_blue: #86daff;
+$electric_lime: #c6ff00;
+
+
+
+.navbar-fixed-top {
+  height: 135px;
+  background-color: $dark_blue;
+  border-bottom: 10px solid $electric_lime;
+}
+body {
+  padding-top: 135px;
+  // background: image-url("bg") no-repeat;
+  // background-size: cover;
+  // background-attachment: fixed;
+  background-color: $sky_blue;
+}
+
+.navbar-brand img{
+  width: 100px;
+}
+
+.navbar-logo{
+ display: block;
+ text-align: center;
+}
+
+.navbar-logo img {
+  margin: 0 auto;
+  margin-top: -50px;
+}
+
+.nav li a{
+  margin-top: 20px;
+  border: 2px solid $dark_blue;
+  background-color: $dark_blue;
+  color: $electric_lime;
+  font-size: 20px;
+}
+
+.nav li.active a,
+.nav li a:focus {
+  background-color: $true_blue;
+  color: $electric_lime;
+}
+.nav li a:hover{
+  background-color: $electric_lime;
+  color: $dark_blue;
+}
+
+.well hr{
+  height: 0px;
+  border: 1px solid $true_blue;
+}
+
+.well h2{
+  color: $true_blue;
+}
+
+.well {
+  background-color: white;
+}
+
+
+.sidebar {
+  right: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: fixed;
+  background-color: $dark_blue;
+  border-left: 10px solid $usaf_blue;
+  border-top: 10px solid $usaf_blue;
+  border-bottom: 10px solid $usaf_blue;
+  float:right;
+  overflow: scroll;
+}
+
+.sidebar h4{
+  color: $electric_lime;
+}
+.sidebar hr{
+  height: 0px;
+  border: 1px solid $sky_blue;
+}
+
+.sidebar_table{
+  height: 200px;
+  overflow: scroll;
+}
+
+.checkin_well{
+  height: 350px;
+  overflow: scroll;
+  margin-left: 50px;
+}
+
+.list_head{
+  position: sticky;
+  width: 100%;
+  background: $dark_blue;
+}
+
+.list_head li{
+  color: $electric_lime;
+}

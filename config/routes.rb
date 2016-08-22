@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     resources :logs, only: [:create, :update, :destroy, :index]
   end
 
-  post 'login' => 'user_session#create'
+  post 'login' => 'user_session#create', as: :login
   delete 'logout' => 'user_session#destroy'
+
+  root 'plans#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
