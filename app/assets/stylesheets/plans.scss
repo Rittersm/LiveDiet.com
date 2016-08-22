@@ -47,7 +47,7 @@ body {
 
 .nav li.active a,
 .nav li a:focus {
-  background-color: $true_blue;
+  background-color: $usaf_blue;
   color: $electric_lime;
 }
 .nav li a:hover{
@@ -111,4 +111,9 @@ body {
 
 .list_head li{
   color: $electric_lime;
+}
+
+.unsubscribe{
+  margin-left: -20px;
+  margin-top: 10px;
 }
