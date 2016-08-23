@@ -13,6 +13,11 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def update
+    @sub = current_user.subscriptions.find(params[:id])
+    @sub.update(subscription_params)
+  end
+
   def destroy
     @sub = current_user.subscriptions.find(params[:id])
     @sub.destroy

@@ -9,7 +9,14 @@
       </div>
     </div>
     <div class="col-xs-6">
-      <%= line_chart subscription.user.check_ins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, discrete: true %>
+      <ul class="nav nav-tabs nav-justified categories">
+        <li><a href="#">Weight</a></li>
+        <li><a href="#">B.M.I</a></li>
+      </ul>
+      <div class="chart">
+        <%= line_chart subscription.user.check_ins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, discrete: true %>
+        <%= line_chart subscription.user.check_ins.group_by_week(:created_at).sum(:new_bmi), min: nil, max: nil, discrete: true %>
+      </div>
     </div>
   </div>
   <hr>

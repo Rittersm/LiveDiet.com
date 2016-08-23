@@ -14,12 +14,10 @@ $electric_lime: #c6ff00;
   height: 135px;
   background-color: $dark_blue;
   border-bottom: 10px solid $electric_lime;
+  font-family: 'Audiowide', cursive;
 }
 body {
   padding-top: 135px;
-  // background: image-url("bg") no-repeat;
-  // background-size: cover;
-  // background-attachment: fixed;
   background-color: $sky_blue;
 }
 
@@ -27,14 +25,14 @@ body {
   width: 100px;
 }
 
-.navbar-logo{
- display: block;
- text-align: center;
-}
 
-.navbar-logo img {
+
+.navbar h1{
+  font-family: 'Audiowide', cursive;
+  font-size: 60px;
+  color: $electric_lime;
   margin: 0 auto;
-  margin-top: -50px;
+  margin-top: 55px;
 }
 
 .nav li a{
@@ -92,6 +90,10 @@ body {
   border: 1px solid $sky_blue;
 }
 
+.sidebar h4 a{
+  color: $electric_lime;
+}
+
 .sidebar_table{
   height: 200px;
   overflow: scroll;
@@ -116,4 +118,21 @@ body {
 .unsubscribe{
   margin-left: -20px;
   margin-top: 10px;
+}
+.chart{
+  border: 2px solid $dark_blue;
+  border-top: none;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 5px;
+}
+
+.btn{
+  background-color: $usaf_blue;
+  color: $electric_lime;
+}
+
+.btn:hover{
+  background-color: $electric_lime;
+  color: $dark_blue;
 }

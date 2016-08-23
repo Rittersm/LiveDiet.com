@@ -6,6 +6,18 @@ class Subscription < ApplicationRecord
 
   before_save :set_starting_weight
   before_save :set_starting_bmi
+  after_save :plan_set_rating
+  after_save :plan_sub_count
+
+  def plan_set_rating
+    plan.set_rating
+    plan.save!
+  end
+
+  def plan_sub_count
+    plan.set_sub_count
+    plan.save!
+  end
 
   def starting_weight
     user.current_weight

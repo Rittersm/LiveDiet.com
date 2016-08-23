@@ -26,9 +26,10 @@
       <li><a href="#">Weight</a></li>
       <li><a href="#">B.M.I</a></li>
     </ul>
-    <hr>
-    <%= line_chart @checkins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, discrete: true %>
-    <%= line_chart @checkins.group_by_week(:created_at).sum(:new_bmi), min: nil, max: nil, discrete: true %>
+    <div class="chart">
+      <%= line_chart @checkins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, discrete: true %>
+      <%= line_chart @checkins.group_by_week(:created_at).sum(:new_bmi), min: nil, max: nil, discrete: true %>
+    </div>
   </div>
 </div>
 <br>

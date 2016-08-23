@@ -4,6 +4,7 @@
     <title>LiveDiet</title>
     <%= csrf_meta_tags %>
 
+    <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -17,7 +18,7 @@
           </a>
         </div>
         <a class="navbar-logo" href="/plans">
-          <%= image_tag "text.png", class: "img-responsive" %>
+          <h1 class="text-center">LiveDiet</h1>
         </a>
       </div>
     </nav>
@@ -25,11 +26,11 @@
       <div class="col-xs-9"><%= yield %></div>
       <div class="col-xs-3 sidebar">
         <% if current_user %>
-          <h4 class="text-center">Welcome, <%= current_user.username %></h4>
+          <h4 class="text-center">Welcome, <a href=<%= user_path(current_user) %>><%= current_user.username %></a></h4>
           <hr>
           <% if current_user.current_plan %>
           <div class="row">
-            <h4 class="col-xs-9">Current Plan: <%= current_user.current_plan.title %></h4>
+            <h4 class="col-xs-9">Current Plan: <a href=<%= plan_path(current_user.current_plan) %>><%= current_user.current_plan.title %></a></h4>
             <div class="col-xs-3 unsubscribe">
               <%= button_to "Unsubscribe", plan_subscription_path(current_user.current_plan, current_user.current_subscription), method: :delete, :class => "btn btn-xs btn-primary" %>
             </div>

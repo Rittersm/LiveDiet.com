@@ -17,7 +17,7 @@ class PlansController < ApplicationController
   end
 
   def index
-    @plans = Plan.all
+    @plans = Plan.all.order(rating: :desc)
     respond_to do |format|
       format.html
       format.json {render json: @plans, each_serializer: PlanSerializer}
