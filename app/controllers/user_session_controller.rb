@@ -8,7 +8,7 @@ class UserSessionController < ApplicationController
       if @user.authenticate(params[:user][:password])
         session[:username] = @user.username
         # render json: @user, serializer: UserSerializer
-        redirect_to root_path
+        redirect_back fallback_location: root_path
       else
         render json: {error: "Incorrect Password"}, status: :unprocessable_entity
       end
@@ -19,7 +19,7 @@ class UserSessionController < ApplicationController
 
   def destroy
     session[:username] = nil
-    redirect_to root_path
+    redirect_back fallback_location: root_path
   end
 
 end

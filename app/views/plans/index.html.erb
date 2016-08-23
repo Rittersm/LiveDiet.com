@@ -1,10 +1,18 @@
 <div>
-  <ul class="nav nav-tabs nav-justified categories">
-    <li><a href="#">Weight Loss</a></li>
-    <li><a href="#">Weight Gain</a></li>
-    <li><a href="#">Bulk Up</a></li>
+  <ul class="nav nav-tabs nav-justified categories" role="tablist">
+    <li role="presentation" class="active"><a href="#weightloss" aria-controls="weightloss" role="tab" data-toggle="tab">Weight Loss</a></li>
+    <li role="presentation"><a href="#weightgain" aria-controls="weightgain" role="tab" data-toggle="tab">Weight Gain</a></li>
+    <li role="presentation"><a href="#musclemass" aria-controls="musclemass" role="tab" data-toggle="tab">Muscle Mass</a></li>
   </ul>
 </div>
-<div>
-  <%= render @plans %>
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="weightloss">
+    <%= render @plans.categorized_plans("Weight Loss") %>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="weightgain">
+    <%= render @plans.categorized_plans("Weight Gain") %>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="musclemass">
+    <%= render @plans.categorized_plans("Muscle Mass") %>
+  </div>
 </div>

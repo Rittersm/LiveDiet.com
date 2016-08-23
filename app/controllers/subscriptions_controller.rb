@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :require_user, only: [:create, :destroy]
+  before_action :require_user, only: [:create, :update, :destroy]
 
   def create
     @plan = Plan.find(params[:plan_id])

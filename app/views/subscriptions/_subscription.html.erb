@@ -9,13 +9,19 @@
       </div>
     </div>
     <div class="col-xs-6">
-      <ul class="nav nav-tabs nav-justified categories">
-        <li><a href="#">Weight</a></li>
-        <li><a href="#">B.M.I</a></li>
+      <ul class="nav nav-tabs nav-justified categories" role="tablist">
+        <li role="presentation" class="active"><a href="#subweight<%= subscription.id %>" aria-controls="subweight" role="tab" data-toggle="tab">Weight</a></li>
+        <li role="presentation"><a href="#subbmi<%= subscription.id %>" aria-controls="subbmi" role="tab" data-toggle="tab">B.M.I</a></li>
       </ul>
       <div class="chart">
-        <%= line_chart subscription.user.check_ins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, discrete: true %>
-        <%= line_chart subscription.user.check_ins.group_by_week(:created_at).sum(:new_bmi), min: nil, max: nil, discrete: true %>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="subweight<%= subscription.id %>">
+            <%= line_chart subscription.user.check_ins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, discrete: true %>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="subbmi<%= subscription.id %>">
+            <%= line_chart subscription.user.check_ins.group_by_week(:created_at).sum(:new_bmi), min: nil, max: nil, discrete: true %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

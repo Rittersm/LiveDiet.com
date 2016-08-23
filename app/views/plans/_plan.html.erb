@@ -11,13 +11,19 @@
     <div class="col-xs-6">
       <% if plan.check_ins.any? %>
         <h4 class="text-center">Average Check-Ins</h4>
-        <ul class="nav nav-tabs nav-justified categories">
-          <li><a href="#">Weight</a></li>
-          <li><a href="#">B.M.I</a></li>
+        <ul class="nav nav-tabs nav-justified categories" role="tablist">
+          <li role="presentation" class="active"><a href="#planweight<%= plan.id %>" aria-controls="planweight" role="tab" data-toggle="tab">Weight</a></li>
+          <li role="presentation"><a href="#planbmi<%= plan.id %>" aria-controls="planbmi" role="tab" data-toggle="tab">B.M.I</a></li>
         </ul>
         <div class="chart">
-          <%= line_chart plan.avg_change(:weight), min: nil, max: nil, discrete: true %>
-          <%= line_chart plan.avg_change(:new_bmi), min: nil, max: nil, discrete: true %>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="planweight<%= plan.id %>">
+              <%= line_chart plan.avg_change(:weight), min: nil, max: nil, discrete: true %>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="planbmi<%= plan.id %>">
+              <%= line_chart plan.avg_change(:new_bmi), min: nil, max: nil, discrete: true %>
+            </div>
+          </div>
         </div>
       <% else %>
         <h4 class="text-center">No Data Available</h4>

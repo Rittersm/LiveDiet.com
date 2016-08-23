@@ -43,4 +43,8 @@ class Plan < ApplicationRecord
     output
   end
 
+  def self.categorized_plans(title)
+    Category.find_by(title: title).plans.all
+  end
+
 end

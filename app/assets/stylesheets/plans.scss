@@ -43,11 +43,13 @@ body {
   font-size: 20px;
 }
 
-.nav li.active a,
-.nav li a:focus {
+.nav li.active a:focus,
+.nav li.active a:hover,
+.nav li.active a{
   background-color: $usaf_blue;
   color: $electric_lime;
 }
+
 .nav li a:hover{
   background-color: $electric_lime;
   color: $dark_blue;
@@ -78,8 +80,6 @@ body {
   border-left: 10px solid $usaf_blue;
   border-top: 10px solid $usaf_blue;
   border-bottom: 10px solid $usaf_blue;
-  float:right;
-  overflow: scroll;
 }
 
 .sidebar h4{
@@ -97,6 +97,10 @@ body {
 .sidebar_table{
   height: 200px;
   overflow: scroll;
+}
+
+.sidebar-tab{
+  height: 20px;
 }
 
 .checkin_well{
