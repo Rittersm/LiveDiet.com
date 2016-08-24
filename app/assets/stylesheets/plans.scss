@@ -18,7 +18,13 @@ $electric_lime: #c6ff00;
 }
 body {
   padding-top: 135px;
-  background-color: $sky_blue;
+  background: linear-gradient(
+    rgba(#86daff, 0.75),
+    rgba(#0964d9, 0.75)
+    ),
+    image-url("bg") no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .navbar-brand img{
@@ -37,7 +43,7 @@ body {
 
 .nav li a{
   margin-top: 20px;
-  border: 2px solid $dark_blue;
+  border: 2px solid $dark_blue !important;
   background-color: $dark_blue;
   color: $electric_lime;
   font-size: 20px;
@@ -47,10 +53,12 @@ body {
 .nav li.active a:hover,
 .nav li.active a{
   background-color: $usaf_blue;
+  border: 2px solid $dark_blue !important;
   color: $electric_lime;
 }
 
 .nav li a:hover{
+  border: 2px solid $dark_blue;
   background-color: $electric_lime;
   color: $dark_blue;
 }
@@ -139,4 +147,8 @@ body {
 .btn:hover{
   background-color: $electric_lime;
   color: $dark_blue;
+}
+
+.subbutton{
+  margin-left: -50px;
 }

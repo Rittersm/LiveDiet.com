@@ -21,7 +21,7 @@ class SubscriptionsController < ApplicationController
   def destroy
     @sub = current_user.subscriptions.find(params[:id])
     @sub.destroy
-    redirect_to root_page
+    redirect_to root_path
   end
 
   def show
@@ -37,6 +37,16 @@ class SubscriptionsController < ApplicationController
       @sub = User.subscriptions
       render json: @sub, serializer: SubscriptionSerializer
     end
+  end
+
+  def weight_chart
+    subscription = Subscription.find(params[:id])
+    render json: subscription.user.check_ins.group_by_week(:created_at).sum(:weight)
+  end
+
+  def bmi_chart
+    subscription = Subscription.find(params[:id])
+    render json: subscription.user.check_ins.group_by_week(:created_at).sum(:new_bmi)
   end
 
   private

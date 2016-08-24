@@ -16,10 +16,10 @@
       <div class="chart">
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="subweight<%= subscription.id %>">
-            <%= line_chart subscription.user.check_ins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, discrete: true %>
+            <%= line_chart weight_chart_plan_subscription_path(subscription), min: nil, max: nil, discrete: true %>
           </div>
           <div role="tabpanel" class="tab-pane" id="subbmi<%= subscription.id %>">
-            <%= line_chart subscription.user.check_ins.group_by_week(:created_at).sum(:new_bmi), min: nil, max: nil, discrete: true %>
+            <%= line_chart bmi_chart_plan_subscription_path(subscription), min: nil, max: nil, discrete: true %>
           </div>
         </div>
       </div>
@@ -35,10 +35,21 @@
       <% end %>
     </div>
     <div class="col-xs-4">
-      <h4>Start Weight: <%= subscription.start_weight %></h4>
+      <h4>Starting Weight: <%= subscription.start_weight %></h4>
     </div>
     <div class="col-xs-3">
       <h4>Starting BMI: <%= subscription.start_bmi %></h4>
+    </div>
+  </div>
+  <div class="col-xs-9 col-xs-offset-3">
+    <hr>
+  </div>
+  <div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+      <h4>Current Weight: <%= subscription.user.current_weight %></h4>
+    </div>
+    <div class="col-xs-4">
+      <h4>Current BMI: <%= subscription.user.current_bmi %></h4>
     </div>
   </div>
 </div>

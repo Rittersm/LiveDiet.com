@@ -47,6 +47,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def weight_chart
+    user = User.find(params[:id])
+    render json: user.check_ins.group_by_week(:created_at).sum(:weight)
+  end
+
+  def bmi_chart
+    user = User.find(params[:id])
+    render json: user.check_ins.group_by_week(:created_at).sum(:new_bmi)
+  end
+
   private
 
   def user_params

@@ -47,4 +47,12 @@ class Plan < ApplicationRecord
     Category.find_by(title: title).plans.all
   end
 
+  def is_subscribed(user)
+    subscriptions.where(user: user).any?
+  end
+
+  def user_subscription(user)
+    subscriptions.find_by(user: user)
+  end
+
 end

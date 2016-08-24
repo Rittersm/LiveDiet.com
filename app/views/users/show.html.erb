@@ -29,10 +29,10 @@
     <div class="chart">
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="userweight<%= @user.id %>">
-          <%= line_chart @checkins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, discrete: true %>
+          <%= line_chart weight_chart_user_path(@user), min: nil, max: nil, discrete: true %>
         </div>
         <div role="tabpanel" class="tab-pane" id="userbmi<%= @user.id %>">
-          <%= line_chart @checkins.group_by_week(:created_at).sum(:new_bmi), min: nil, max: nil, discrete: true %>
+          <%= line_chart bmi_chart_user_path(@user), min: nil, max: nil, discrete: true %>
         </div>
       </div>
     </div>
