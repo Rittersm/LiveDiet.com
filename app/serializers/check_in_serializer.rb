@@ -1,3 +1,3 @@
 class CheckInSerializer < ActiveModel::Serializer
-  attributes :weight, :new_bmi
+  attributes :created_at, :weight, :new_bmi
 end
