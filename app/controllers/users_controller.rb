@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @newuser = User.new(user_params)
     if @newuser.save
       session[:username] = @newuser.username
-      render json: @newuser, serializer: UserSerializer
+      redirect_back fallback_location: root_path
     else
       render json: @newuser.errors, status: :unprocessable_entity
     end
