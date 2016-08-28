@@ -17,18 +17,28 @@ class PlansController < ApplicationController
   end
 
   def index
-    @plans = Plan.all
+    @loss_plans = Plan.categorized_plans("Weight Loss").page(params[:page]).per(4)
+    @gain_plans = Plan.categorized_plans("Weight Gain").page(params[:page]).per(4)
+    @mass_plans = Plan.categorized_plans("Muscle Mass").page(params[:page]).per(4)
+    if params[:category] == "Weight Loss"
+      @plans = Plan.categorized_plans("Weight Loss").page(params[:page]).per(4)
+    elsif
+      @plans = Plan.categorized_plans("Weight Gain").page(params[:page]).per(4)
+    elsif
+      @plans = Plan.categorized_plans("Muscle Mass").page(params[:page]).per(4)
+    end
     respond_to do |format|
       format.html
-      format.json {render json: @plans, each_serializer: PlanSerializer}
+      format.js
     end
   end
 
   def show
     @plan = Plan.find(params[:id])
-    @subscription = @plan.subscriptions.all
+    @subscription = @plan.subscriptions.all.page(params[:page]).per(4)
     respond_to do |format|
       format.html
+      format.js
       format.json {render json: @plan, serializer: PlanSerializer}
     end
   end

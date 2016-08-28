@@ -1,0 +1,3 @@
+$('#logs').html( '<%= escape_javascript(render @logs) %>')
+$('#logs').append('<%= escape_javascript( paginate @logs, remote: true ) %>')
+window.scrollTo(0, 800)

@@ -1,0 +1,3 @@
+$('#subscriptions').html( '<%= escape_javascript(render @subscription) %>')
+$('#subscriptions').append('<%= escape_javascript( paginate @subscription, remote: true ) %>')
+window.scrollTo(0, 600)

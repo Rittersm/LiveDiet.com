@@ -31,8 +31,6 @@ body {
   width: 100px;
 }
 
-
-
 .navbar h1{
   font-family: 'Audiowide', cursive;
   font-size: 60px;
@@ -63,6 +61,18 @@ body {
   color: $dark_blue;
 }
 
+.dropdown{
+  margin-top: 75px;
+}
+
+.dropdown button{
+  background-color: $dark_blue;
+}
+
+.dropdown button:focus{
+  color: $electric_lime;
+}
+
 .well hr{
   height: 0px;
   border: 1px solid $true_blue;
@@ -83,11 +93,19 @@ body {
   margin-bottom: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
-  position: fixed;
   background-color: $dark_blue;
   border-left: 10px solid $usaf_blue;
   border-top: 10px solid $usaf_blue;
   border-bottom: 10px solid $usaf_blue;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  
+}
+
+.affix-bottom,
+.affix-top{
+  position: fixed;
+  right: 0
 }
 
 .sidebar hr{
@@ -149,4 +167,76 @@ body {
 
 .subbutton{
   margin-left: -50px;
+}
+
+.footer-top{
+  background-color: $usaf_blue;
+}
+
+
+.glyphicon-color,
+.footer-list,
+.footer-top h3,
+.footer-top strong,
+.footer-top p{
+  color: $electric_lime;
+}
+
+.footer-bottom{
+  border-top: 5px solid $electric_lime;
+  background-color: $dark_blue;
+  padding-top: 10px;
+}
+
+.list-color{
+  color: $electric_lime;
+}
+
+.list-color i{
+  font-size: 20px;
+}
+
+.list-color a i{
+  font-size: 20px;
+  color: $electric_lime
+}
+
+.footer-icon{
+  width: 20px;
+  color: $electric_lime;
+}
+
+.welcome-body{
+  background-color: $usaf_blue;
+}
+
+.welcome-brand{
+  display: inline;
+  width: 150px;
+  float: left;
+  margin-right: 25px;
+}
+
+h2 small{
+  color: $usaf_blue;
+}
+
+.brand-name{
+  color: $true_blue;
+  font-family: 'Audiowide', cursive;
+}
+
+.dropdown-menu{
+  background-color: $dark_blue;
+  border: 2px solid $electric_lime;
+  border-radius: 10px;
+}
+
+.dropdown-menu li a{
+  color: $electric_lime;
+}
+
+.dropdown-menu li a:hover{
+  background-color: $electric_lime;
+  color: $dark_blue;
 }

@@ -18,10 +18,10 @@
         <div class="chart">
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="planweight<%= plan.id %>">
-              <%= line_chart weight_chart_plan_path(plan), min: nil, max: nil, discrete: true %>
+              <%= line_chart weight_chart_plan_path(plan), min: nil, max: nil, discrete: true, id: "weight_chart_#{plan.id}" %>
             </div>
             <div role="tabpanel" class="tab-pane" id="planbmi<%= plan.id %>">
-              <%= line_chart bmi_chart_plan_path(plan), min: nil, max: nil, discrete: true %>
+              <%= line_chart bmi_chart_plan_path(plan), min: nil, max: nil, discrete: true, id: "bmi_chart_#{plan.id}" %>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@
     </div>
     <div class="col-xs-1 subbutton">
       <% if plan.is_subscribed(current_user) %>
-        <button type="button" class="btn btn-primary">Current Plan</button>
+        <a class="btn btn-primary" href="/plans/<%= plan.id %>" role="button">Current Plan</a>
       <% else %>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SubscribeModal<%= plan.id %>">Subscribe</button>
       <% end %>
@@ -71,9 +71,6 @@
           <h5>Register:</h5>
           <%= render partial: 'layouts/user' %>
         <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

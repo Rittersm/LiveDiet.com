@@ -16,10 +16,10 @@
       <div class="chart">
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="subweight<%= subscription.id %>">
-            <%= line_chart weight_chart_plan_subscription_path(subscription), min: nil, max: nil, discrete: true %>
+            <%= line_chart weight_chart_plan_subscription_path(subscription.plan, subscription), min: nil, max: nil, discrete: true, id: "sub_weight#{subscription.id}" %>
           </div>
           <div role="tabpanel" class="tab-pane" id="subbmi<%= subscription.id %>">
-            <%= line_chart bmi_chart_plan_subscription_path(subscription), min: nil, max: nil, discrete: true %>
+            <%= line_chart bmi_chart_plan_subscription_path(subscription.plan, subscription), min: nil, max: nil, discrete: true, id: "sub_bmi#{subscription.id}" %>
           </div>
         </div>
       </div>

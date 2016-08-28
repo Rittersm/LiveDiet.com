@@ -5,8 +5,9 @@
 <hr>
 <% if @subscription.any? %>
   <h2>Subscribers:</h2>
-  <div>
+  <div id="subscriptions">
     <%= render @subscription %>
+    <%= paginate @subscription, :remote => true %>
   </div>
 <% else %>
   <h2>Subscribers: NONE</h2>

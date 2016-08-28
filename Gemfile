@@ -34,6 +34,9 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'faker'
 gem "chartkick"
 gem 'groupdate'
+gem 'kaminari'
+gem 'kaminari-bootstrap', '~> 3.0.1'
+gem "font-awesome-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

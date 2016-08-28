@@ -6,13 +6,16 @@
   </ul>
 </div>
 <div class="tab-content">
-  <div role="tabpanel" class="tab-pane active" id="weightloss">
-    <%= render @plans.categorized_plans("Weight Loss") %>
+  <div role="tabpanel" class="tab-pane active diet_category" id="weightloss">
+    <%= render @loss_plans %>
+    <%= paginate @loss_plans, :params => {:category => "Weight Loss"}, :remote => true %>
   </div>
-  <div role="tabpanel" class="tab-pane" id="weightgain">
-    <%= render @plans.categorized_plans("Weight Gain") %>
+  <div role="tabpanel" class="tab-pane diet_category" id="weightgain">
+    <%= render @gain_plans %>
+    <%= paginate @gain_plans, :params => {:category => "Weight Gain"}, :remote => true %>
   </div>
-  <div role="tabpanel" class="tab-pane" id="musclemass">
-    <%= render @plans.categorized_plans("Muscle Mass") %>
+  <div role="tabpanel" class="tab-pane diet_category" id="musclemass">
+    <%= render @mass_plans %>
+    <%= paginate @mass_plans, :params => {:category => "Muscle Mass"}, :remote => true %>
   </div>
 </div>

@@ -40,9 +40,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @checkins = @user.check_ins.all
-    @logs = @user.logs.all
+    @logs = @user.logs.all.page(params[:page]).per(10)
     respond_to do |format|
       format.html
+      format.js
       format.json {render json: @user, serializer: UserSerializer}
     end
   end
