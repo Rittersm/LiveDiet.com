@@ -99,7 +99,7 @@ body {
   border-bottom: 10px solid $usaf_blue;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  
+
 }
 
 .affix-bottom,
@@ -226,6 +226,9 @@ h2 small{
   font-family: 'Audiowide', cursive;
 }
 
+.dropdown{
+  float: right;
+}
 .dropdown-menu{
   background-color: $dark_blue;
   border: 2px solid $electric_lime;
