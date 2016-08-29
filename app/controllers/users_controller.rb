@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def create
     @newuser = User.new(user_params)
     if @newuser.save
+      UserMailer.signup_email(@newuser).deliver
       session[:username] = @newuser.username
       redirect_back fallback_location: root_path
     else
