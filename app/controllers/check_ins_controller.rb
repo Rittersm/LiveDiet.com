@@ -7,7 +7,7 @@ class CheckInsController < ApplicationController
     @newcheckin.user = current_user
     @newcheckin.subscription = current_user.subscriptions.last
     if @newcheckin.save
-      UserMailer.checkin_reminder(@newcheckin.user).delay(run_at: 6.days.from_now)
+      UserMailer.delay(run_at: 6.days.from_now).checkin_reminder(@newcheckin.user)
       render json: @newcheckin, status: :created
     else
       render json: @newcheckin.errors, status: :unprocessable_entity
