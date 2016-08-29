@@ -2,3 +2,6 @@ $.each($('.diet_category.active .chartjs'), function(index, e){ Chartkick.charts
 $('.diet_category.active').html( '<%= escape_javascript(render @plans) %>')
 $('.diet_category.active').append('<%= escape_javascript( paginate @plans, remote: true ) %>')
 window.scrollTo(0, 0)
+setTimeout(function(){
+  window.scrollTo(0,1)
+},0)
