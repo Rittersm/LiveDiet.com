@@ -9,7 +9,7 @@ class LogsController < ApplicationController
     if @newlog.save
       render json: @newlog, status: :created
     else
-      render json: @newlog.errors, status: :unprocessable_entity
+      render json: @newlog.errors.full_messages, status: :unprocessable_entity
     end
   end
 

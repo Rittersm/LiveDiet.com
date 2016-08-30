@@ -1,0 +1,8 @@
+<h1>Hey there, <%= @user.username %>!</h1>
+<p>
+  We're just emailing you to remind you that you have another check in scheduled for tomorrow.
+  You can submit your check in anytime after <% DateTime.now.tomorrow.strftime('%I:%M:%S %p') %>
+</p>
+<p>
+  Keep in mind this is only one step on your journey and will help you and others in the endeavor for a healthier lifestyle.
+</p>

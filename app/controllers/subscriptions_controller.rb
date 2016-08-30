@@ -9,7 +9,7 @@ class SubscriptionsController < ApplicationController
     if @newsub.save
       render json: @newsub, status: :created
     else
-      render json: @newsub.errors, status: :unprocessable_entity
+      render json: @newsub.errors.full_messages, status: :unprocessable_entity
     end
   end
 

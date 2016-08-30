@@ -47,6 +47,10 @@ class Plan < ApplicationRecord
     Category.find_by(title: title).plans.all
   end
 
+  def self.ranked_plans(title)
+    categorized_plans(title).first
+  end
+
   def is_subscribed(user)
     subscriptions.where(user: user).any?
   end

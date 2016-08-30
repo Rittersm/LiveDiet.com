@@ -58,7 +58,28 @@
               <h4 class="col-xs-12">Current Plan: <a href=<%= plan_path(current_user.current_plan) %>><%= current_user.current_plan.title %></a></h4>
             </div>
             <% else %>
-              <h4 class="text-center">Current Plan: N/A</h4>
+              <h4>Current Plan: N/A</h4>
+              <br>
+              <div>
+                <h4>Highest Ranking Plans:</h4>
+                <br>
+                <ul>
+                  <li>
+                    <h4>Weight Loss: <a href="/plans/<%= Plan.ranked_plans("Weight Loss").id %>"><%= Plan.ranked_plans("Weight Loss").title %></a></h4>
+                  </li>
+                  <br>
+                  <li>
+                    <h4>Weight Gain: <a href="/plans/<%= Plan.ranked_plans("Weight Gain").id %>"><%= Plan.ranked_plans("Weight Gain").title %></a></h4>
+                  </li>
+                  <br>
+                  <li>
+                    <h4>Muscle Mass: <a href="/plans/<%= Plan.ranked_plans("Muscle Mass").id %>"><%= Plan.ranked_plans("Muscle Mass").title %></a></h4>
+                  </li>
+                </ul>
+              </div>
+              <br>
+              <hr>
+              <br>
             <% end %>
             <% if current_user.check_ins.any? %>
               <div class="well well-sm sidebar_table">
@@ -83,8 +104,15 @@
                 <%= line_chart current_user.check_ins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, height: "200px", discrete: true %>
               </div>
             <% else %>
-              <h4 class="col-xs-12 text-center">Subscribe Today!</h4>
-                
+              <h5>Plan Overview:</h5>
+              <div class="well well-sm sidebar-overview">
+                <p>
+                  <%= current_user.current_plan.overview %>
+                </p>
+              </div>
+              <br>
+              <h4 class="text-center">Let's Get Started!</h4>
+              <hr>
             <% end %>
             <div class="row">
               <div class="col-xs-4">

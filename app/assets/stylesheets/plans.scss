@@ -99,7 +99,6 @@ body {
   border-bottom: 10px solid $usaf_blue;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-
 }
 
 .affix-bottom,
@@ -113,6 +112,8 @@ body {
   border: 1px solid $sky_blue;
 }
 
+.sidebar h5,
+.sidebar p,
 .sidebar h4,
 .sidebar h4 a{
   color: $electric_lime;
@@ -123,8 +124,11 @@ body {
   overflow: scroll;
 }
 
-.sidebar-tab{
-  height: 20px;
+.sidebar-overview{
+  max-height: 300px;
+  overflow: scroll;
+  background-color: transparent;
+  border: none;
 }
 
 .checkin_well{

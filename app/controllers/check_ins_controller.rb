@@ -10,7 +10,7 @@ class CheckInsController < ApplicationController
       UserMailer.delay(run_at: 6.days.from_now).checkin_reminder(@newcheckin.user)
       render json: @newcheckin, status: :created
     else
-      render json: @newcheckin.errors, status: :unprocessable_entity
+      render json: @newcheckin.errors.full_messages, status: :unprocessable_entity
     end
   end
 

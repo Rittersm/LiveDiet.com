@@ -8,22 +8,26 @@
         <p><%= subscription.expectations %></p>
       </div>
     </div>
-    <div class="col-xs-6">
-      <ul class="nav nav-tabs nav-justified categories" role="tablist">
-        <li role="presentation" class="active"><a href="#subweight<%= subscription.id %>" aria-controls="subweight" role="tab" data-toggle="tab">Weight</a></li>
-        <li role="presentation"><a href="#subbmi<%= subscription.id %>" aria-controls="subbmi" role="tab" data-toggle="tab">B.M.I</a></li>
-      </ul>
-      <div class="chart">
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="subweight<%= subscription.id %>">
-            <%= line_chart weight_chart_plan_subscription_path(subscription.plan, subscription), min: nil, max: nil, discrete: true, id: "sub_weight#{subscription.id}" %>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="subbmi<%= subscription.id %>">
-            <%= line_chart bmi_chart_plan_subscription_path(subscription.plan, subscription), min: nil, max: nil, discrete: true, id: "sub_bmi#{subscription.id}" %>
+    <% if subscription.check_ins.any? %>
+      <div class="col-xs-6">
+        <ul class="nav nav-tabs nav-justified categories" role="tablist">
+          <li role="presentation" class="active"><a href="#subweight<%= subscription.id %>" aria-controls="subweight" role="tab" data-toggle="tab">Weight</a></li>
+          <li role="presentation"><a href="#subbmi<%= subscription.id %>" aria-controls="subbmi" role="tab" data-toggle="tab">B.M.I</a></li>
+        </ul>
+        <div class="chart">
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="subweight<%= subscription.id %>">
+              <%= line_chart weight_chart_plan_subscription_path(subscription.plan, subscription), min: nil, max: nil, discrete: true, id: "sub_weight#{subscription.id}" %>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="subbmi<%= subscription.id %>">
+              <%= line_chart bmi_chart_plan_subscription_path(subscription.plan, subscription), min: nil, max: nil, discrete: true, id: "sub_bmi#{subscription.id}" %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <% else %>
+      <h4 class="text-center">No Data Available</h4>
+    <% end %>  
   </div>
   <hr>
   <div class="row">

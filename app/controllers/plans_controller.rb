@@ -12,7 +12,7 @@ class PlansController < ApplicationController
     if @newplan.save
       render json: @newplan, status: :created
     else
-      render json: @newplan.errors, status: :unprocessable_entity
+      render json: @newplan.errors.full_messages, status: :unprocessable_entity
     end
   end
 

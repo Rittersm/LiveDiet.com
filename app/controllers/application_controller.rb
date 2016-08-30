@@ -50,4 +50,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ranked_plans
+    Plan.all.limit(3)
+  end
+
 end
