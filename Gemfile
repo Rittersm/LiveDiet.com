@@ -40,6 +40,7 @@ gem "font-awesome-rails"
 gem 'delayed_job_active_record'
 gem 'figaro'
 gem 'rails_12factor'
+gem 'handlebars_assets'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

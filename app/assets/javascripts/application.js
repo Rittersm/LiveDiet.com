@@ -15,4 +15,6 @@
 //= require bootstrap-sprockets
 //= require Chart.bundle
 //= require chartkick
+//= require handlebars.runtime
+//= require_tree ./templates
 //= require_tree .

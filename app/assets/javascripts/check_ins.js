@@ -8,10 +8,18 @@ $(document).ready(function(){
         processData: false,
         contentType: false,
         success: function(data) {
+          var = context{
+            created_at: moment(data.created_at).format('ll'),
+            weight: data.weight,
+            new_bmi: data.new_bmi
+          }
           $('#CheckinModal').modal("hide")
-          $('.sidebar_table_contents').prepend('<ul class="list-inline row"><li class="col-xs-4 text-left">' + moment(data.created_at).format('ll') + '</li><li class="col-xs-4 text-center">' + data.weight + '</li><li class="col-xs-4 text-center">' + data.new_bmi + '</li><ul>')
+          $('.sidebar_table_contents').prepend(context)
           document.getElementById('new_check_in').reset();
           $('#new_check_in input[type="submit"]').prop('disabled', false);
+        },
+        error: function(error){
+        console.log(error)
         }
     })
   })

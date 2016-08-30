@@ -1,0 +1,36 @@
+<div class="well well-lg">
+  <div class="row">
+    <div class="col-xs-6">
+      <a class="col-xs-12" href="/users/{{user_id}}">
+        <h2>{{user.username}}</h2>
+      </a>
+      <div class="col-xs-12">
+        <p>{{expectations}}</p>
+      </div>
+    </div>
+    <h4 class="text-center">No Data Available</h4>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-xs-4">
+      <h4>Rating: N/A</h4>
+    </div>
+    <div class="col-xs-4">
+      <h4>Starting Weight: {{start_weight}}</h4>
+    </div>
+    <div class="col-xs-3">
+      <h4>Starting BMI: {{start_bmi}}</h4>
+    </div>
+  </div>
+  <div class="col-xs-9 col-xs-offset-3">
+    <hr>
+  </div>
+  <div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+      <h4>Current Weight: {{user.current_weight}}</h4>
+    </div>
+    <div class="col-xs-4">
+      <h4>Current BMI: {{user.current_bmi}}</h4>
+    </div>
+  </div>
+</div>

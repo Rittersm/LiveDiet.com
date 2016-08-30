@@ -1,0 +1,48 @@
+<div class="well well-lg" id="{{id}}">
+  <div class="row">
+    <div class="col-xs-6">
+      <a class="col-xs-12" href="/plans/{{id}}">
+        <h2>{{title}}</h2>
+      </a>
+      <div class="col-xs-12">
+        <p>{{overview}}</p>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <h4 class="text-center">No Data Available</h4>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-xs-4">
+      <h4>Rating: {{rating}}/5</h4>
+    </div>
+    <div class="col-xs-4">
+      <h4>Category: {{category.title}}</h4>
+    </div>
+    <div class="col-xs-3">
+      <h4>Total Subscribers: {{subscriptions.length}} </h4>
+    </div>
+    <div class="col-xs-1 subbutton">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SubscribeModal{{id}}">Subscribe</button>
+    </div>
+  </div>
+</div>
+<div class="modal fade subscribe-modal" id="SubscribeModal{{id}}" tabindex="-1" role="dialog" aria-labelledby="SubscribeModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Subscribe to {{title}}</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for [plan, @newsub] do |f| %>
+          <fieldset class="form-group">
+            <%= f.text_area :expectations, :class => "form-control", :placeholder => "Expectations:" %>
+          </fieldset>
+          <%= f.submit :class => "btn btn-primary submit-button" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

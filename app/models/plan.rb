@@ -4,6 +4,9 @@ class Plan < ApplicationRecord
   has_many :logs
   has_many :check_ins, through: :subscriptions
 
+  validates :title, presence: true
+  validates :overview, presence: true
+
   default_scope { order(rating: :desc, sub_count: :desc) }
 
   def set_rating
