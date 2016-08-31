@@ -97,7 +97,7 @@
                   </ul>
                 </div>
                 <div class="well well-sm">
-                  <%= line_chart current_user.check_ins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, height: "180px", discrete: true %>
+                  <%= line_chart current_user.check_ins.unscoped.group_by_week(:created_at).sum(:weight), min: nil, max: nil, height: "180px", discrete: true %>
                 </div>
               <% else %>
                 <h5>Plan Overview:</h5>
