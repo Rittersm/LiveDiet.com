@@ -15,11 +15,13 @@ $(document).ready(function(){
           if (window.location.pathname === '/users/' + data.user_id +''){
             $('#logs').prepend(HandlebarsTemplates['log'](context))
           }
-          document.getElementById('new_log').reset();
-          $('#new_log input[type="submit"]').prop('disabled', false);
-        }
+          document.getElementById('new_log').reset()
+          $('#new_log input[type="submit"]').prop('disabled', false)
+        },
         error: function(error){
         console.log(error)
+        $('#LogModal .modal-body').prepend(HandlebarsTemplates['error'](error))
+        $('#new_log input[type="submit"]').prop('disabled', false)
         }
     })
   })

@@ -14,8 +14,14 @@ class SubscriptionsController < ApplicationController
   end
 
   def update
-    @sub = current_user.subscriptions.find(params[:id])
-    @sub.update(subscription_params)
+    @rating = Rating.find_by(value: params[:value])
+    @sub = current_user.current_subscription
+    @sub.rating = @rating
+    if @sub.save
+      render json: @sub, status: :accepted
+    else
+      render json: @sub.errors.full_messages, status: :unprocessable_entity
+    end
   end
 
   def destroy

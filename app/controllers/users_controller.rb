@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @newuser.save
       UserMailer.signup_email(@newuser).deliver
       session[:username] = @newuser.username
-      redirect_back fallback_location: root_path
+      render json: @newuser, status: :created
     else
       render json: @newuser.errors, status: :unprocessable_entity
     end

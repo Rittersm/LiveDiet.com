@@ -28,6 +28,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal fade subscribe-modal" id="SubscribeModal{{id}}" tabindex="-1" role="dialog" aria-labelledby="SubscribeModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -36,12 +37,12 @@
         <h4 class="modal-title" id="myModalLabel">Subscribe to {{title}}</h4>
       </div>
       <div class="modal-body">
-        <%= form_for [plan, @newsub] do |f| %>
+        <form class="new_subscription" id="new_subscription" action="/plans/{{id}}/subscriptions" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
           <fieldset class="form-group">
-            <%= f.text_area :expectations, :class => "form-control", :placeholder => "Expectations:" %>
+            <textarea class="form-control" placeholder="Expectations:" name="subscription[expectations]" id="subscription_expectations"></textarea>
           </fieldset>
-          <%= f.submit :class => "btn btn-primary submit-button" %>
-        <% end %>
+          <input type="submit" name="commit" value="Create Subscription" class="btn btn-primary submit-button" data-disable-with="Create Subscription" />
+        </form>
       </div>
     </div>
   </div>

@@ -8,18 +8,20 @@ $(document).ready(function(){
         processData: false,
         contentType: false,
         success: function(data) {
-          var = context{
+          var context = {
             created_at: moment(data.created_at).format('ll'),
             weight: data.weight,
             new_bmi: data.new_bmi
           }
           $('#CheckinModal').modal("hide")
           $('.sidebar_table_contents').prepend(context)
-          document.getElementById('new_check_in').reset();
-          $('#new_check_in input[type="submit"]').prop('disabled', false);
+          document.getElementById('new_check_in').reset()
+          $('#new_check_in input[type="submit"]').prop('disabled', false)
         },
         error: function(error){
         console.log(error)
+        $('#CheckinModal .modal-body').prepend(HandlebarsTemplates['error'](error))
+        $('#new_check_in input[type="submit"]').prop('disabled', false)
         }
     })
   })

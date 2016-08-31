@@ -33,6 +33,13 @@
                 <li><a href=<%= plan_path(current_user.current_plan) %>>Current Plan</a></li>
               <% end %>
               <li><a href=<%= user_path(current_user) %>>Your Profile</a></li>
+              <li class="menu-item dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Your Plans</a>
+                <ul class="dropdown-menu">
+                  <% current_user.subscriptions.reject{|x| x.plan.nil?}.each do |x| %>
+                    <li class="menu-item "><a href="/plans/<%= x.plan.id %>"><%= x.plan.title %></a></li>
+                  <% end %>
+                </ul>
+              </li>
               <li><%= link_to "Logout", logout_path, method: :delete %></li>
             </ul>
           <% else %>
@@ -56,6 +63,17 @@
             <% if current_user.current_plan %>
             <div class="row">
               <h4 class="col-xs-12">Current Plan: <a href=<%= plan_path(current_user.current_plan) %>><%= current_user.current_plan.title %></a></h4>
+            </div>
+            <div class="row">
+              <h4 class="col-xs-4">Rate Plan:</h4>
+              <select id="subscription-rating" data-subscription="<%= current_user.current_subscription.id %>" data-plan="<%= current_user.current_plan.id %>">
+                <option value="0" <%= selected?(0) %> >0</option>
+                <option value="1" <%= selected?(1) %> >1</option>
+                <option value="2" <%= selected?(2) %> >2</option>
+                <option value="3" <%= selected?(3) %> >3</option>
+                <option value="4" <%= selected?(4) %> >4</option>
+                <option value="5" <%= selected?(5) %>>5</option>
+              </select>
             </div>
             <% else %>
               <h4>Current Plan: N/A</h4>
@@ -101,7 +119,7 @@
                 </ul>
               </div>
               <div class="well well-sm">
-                <%= line_chart current_user.check_ins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, height: "200px", discrete: true %>
+                <%= line_chart current_user.check_ins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, height: "180px", discrete: true %>
               </div>
             <% else %>
               <h5>Plan Overview:</h5>

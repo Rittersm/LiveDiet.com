@@ -6,6 +6,7 @@ class Plan < ApplicationRecord
 
   validates :title, presence: true
   validates :overview, presence: true
+  validates :category, presence: true
 
   default_scope { order(rating: :desc, sub_count: :desc) }
 

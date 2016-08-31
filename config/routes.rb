@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       get 'weight_chart'
       get 'bmi_chart'
     end
-    resources :subscriptions, only: [:create, :destroy, :show, :index] do
+    resources :subscriptions, only: [:create, :update, :destroy, :show, :index] do
       member do
         get 'weight_chart'
         get 'bmi_chart'
