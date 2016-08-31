@@ -31,7 +31,7 @@ class Plan < ApplicationRecord
 
   def avg_change(x)
     output = {}
-    max_count = CheckIn.unscoped.having(subscription_id: subscriptions.ids).group(:subscription_id).count.max_by{|key, value| value}[1]
+    max_count = CheckIn.having(subscription_id: subscriptions.ids).group(:subscription_id).count.max_by{|key, value| value}[1]
     subscriptions.each do |y|
       max_count.times do |num|
         week = num + 1

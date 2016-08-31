@@ -4,8 +4,6 @@ class CheckIn < ApplicationRecord
 
   before_save :set_new_bmi
 
-  default_scope { order(created_at: :asc)}
-
   validates :weight, presence: true
   validate :week_limit, on: :create
 

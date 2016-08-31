@@ -47,12 +47,12 @@ class SubscriptionsController < ApplicationController
 
   def weight_chart
     subscription = Subscription.find(params[:id])
-    render json: subscription.user.check_ins.unscoped.group_by_week(:created_at).sum(:weight)
+    render json: subscription.user.check_ins.group_by_week(:created_at).sum(:weight)
   end
 
   def bmi_chart
     subscription = Subscription.find(params[:id])
-    render json: subscription.user.check_ins.unscoped.group_by_week(:created_at).sum(:new_bmi)
+    render json: subscription.user.check_ins.group_by_week(:created_at).sum(:new_bmi)
   end
 
   private
