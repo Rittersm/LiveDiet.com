@@ -41,6 +41,10 @@ gem 'delayed_job_active_record'
 gem 'figaro'
 gem 'rails_12factor'
 gem 'handlebars_assets'
+gem 'refile', github: 'refile/refile', require: 'refile/rails'
+gem 'refile-mini_magick', github: 'refile/refile-mini_magick'
+gem 'sinatra', github: 'sinatra/sinatra', branch: 'master'
+gem 'refile-postgres', '~> 1.4'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -16,6 +16,10 @@
         <%= f.text_field :inches, :class => "form-control", :size => "12", :placeholder => "Inches" %>
         <%= f.text_field :starting_weight, :class => "form-control", :size => "14", :placeholder => "Weight" %>
       </fieldset>
+      <fieldset class="form-group">
+        <%= f.attachment_field :profile_image %>
+        <small class="text-muted">Upload Profile Image</small>
+      </fieldset>
       <%= f.submit :class => "btn btn-primary btn-block submit-button" %>
       <small class="text-muted">*Please ensure all fields have been completed*</small>
     <% end %>
