@@ -35,9 +35,9 @@ class Plan < ApplicationRecord
     subscriptions.each do |y|
       max_count.times do |num|
         week = num + 1
-        if y.check_ins.num
+        if y.check_ins[num]
           output["week#{week}".to_sym] = [] unless output["week#{week}".to_sym]
-          output["week#{week}".to_sym] << y.check_ins.num.send(x)
+          output["week#{week}".to_sym] << y.check_ins[num].send(x)
         end
       end
     end
