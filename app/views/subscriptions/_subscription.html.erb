@@ -1,11 +1,21 @@
 <div class="well well-lg">
   <div class="row">
     <div class="col-xs-6">
-      <a class="col-xs-12" href="/users/<%= subscription.user.id %>">
-        <h2><%= subscription.user.username %></h2>
-      </a>
-      <div class="col-xs-12">
-        <p><%= subscription.expectations %></p>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-6">
+            <%= image_tag attachment_url(subscription.user, :profile_image, :fill, 183, 238, format: "jpg", fallback: "default.png") %>
+          </div>
+          <div class="col-xs-6">
+            <a class="col-xs-6" href="/users/<%= subscription.user.id %>">
+              <h2><%= subscription.user.username %></h2>
+            </a>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <h2>Expectations:</h2>
+          <p><%= subscription.expectations %></p>
+        </div>
       </div>
     </div>
     <% if subscription.check_ins.any? %>
@@ -27,7 +37,7 @@
       </div>
     <% else %>
       <h4 class="text-center">No Data Available</h4>
-    <% end %>  
+    <% end %>
   </div>
   <hr>
   <div class="row">

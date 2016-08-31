@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
-  has_many :plans
   has_many :subscriptions, dependent: :destroy
   has_many :logs, dependent: :destroy
   has_many :check_ins, dependent: :destroy
+  attachment :profile_image
 
   before_save :starting_bmi
 
