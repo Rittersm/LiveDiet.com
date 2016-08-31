@@ -51,11 +51,11 @@ end
     created_at: 12.weeks.ago + ((num + 1) * 7).days
     )
   end
-  84.times do |num|
+  42.times do |num|
     user.logs.create(
     plan: user.current_plan,
     daily_overview: Faker::Lorem.sentences(4).join("\n\n"),
-    created_at: 12.weeks.ago + (num + 1).days
+    created_at: 6.weeks.ago + (num + 1).days
     )
   end
 end
