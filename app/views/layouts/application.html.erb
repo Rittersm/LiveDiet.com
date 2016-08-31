@@ -33,13 +33,15 @@
                 <li><a href=<%= plan_path(current_user.current_plan) %>>Current Plan</a></li>
               <% end %>
               <li><a href=<%= user_path(current_user) %>>Your Profile</a></li>
-              <li class="menu-item dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Your Plans</a>
-                <ul class="dropdown-menu">
-                  <% current_user.subscriptions.reject{|x| x.plan.nil?}.each do |x| %>
-                    <li class="menu-item "><a href="/plans/<%= x.plan.id %>"><%= x.plan.title %></a></li>
-                  <% end %>
-                </ul>
-              </li>
+              <% if current_user.subscriptions.reject{|x| x.plan.nil?}.any? %>
+                <li class="menu-item dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Your Plans</a>
+                  <ul class="dropdown-menu">
+                    <% current_user.subscriptions.reject{|x| x.plan.nil?}.each do |x| %>
+                      <li class="menu-item "><a href="/plans/<%= x.plan.id %>"><%= x.plan.title %></a></li>
+                    <% end %>
+                  </ul>
+                </li>
+              <% end %>
               <li><%= link_to "Logout", logout_path, method: :delete %></li>
             </ul>
           <% else %>
@@ -53,7 +55,7 @@
       </div>
     </nav>
 
-    <div class="container-fluid" >
+    <div class="container-fluid main-body" >
       <% unless @disable_sidebar %>
         <div class="col-xs-9"><%= yield %></div>
         <div class="col-xs-3 sidebar" id="sidebar" data-spy="affix" data-offset-top="60" data-offset-bottom="290">
@@ -61,20 +63,53 @@
             <h4 class="text-center">Welcome, <a href=<%= user_path(current_user) %>><%= current_user.username %></a></h4>
             <hr>
             <% if current_user.current_plan %>
-            <div class="row">
-              <h4 class="col-xs-12">Current Plan: <a href=<%= plan_path(current_user.current_plan) %>><%= current_user.current_plan.title %></a></h4>
-            </div>
-            <div class="row">
-              <h4 class="col-xs-4">Rate Plan:</h4>
-              <select id="subscription-rating" data-subscription="<%= current_user.current_subscription.id %>" data-plan="<%= current_user.current_plan.id %>">
-                <option value="0" <%= selected?(0) %> >0</option>
-                <option value="1" <%= selected?(1) %> >1</option>
-                <option value="2" <%= selected?(2) %> >2</option>
-                <option value="3" <%= selected?(3) %> >3</option>
-                <option value="4" <%= selected?(4) %> >4</option>
-                <option value="5" <%= selected?(5) %>>5</option>
-              </select>
-            </div>
+              <div class="row">
+                <h4 class="col-xs-12">Current Plan: <a href=<%= plan_path(current_user.current_plan) %>><%= current_user.current_plan.title %></a></h4>
+              </div>
+              <div class="row">
+                <h4 class="col-xs-4">Rate Plan:</h4>
+                <select id="subscription-rating" data-subscription="<%= current_user.current_subscription.id %>" data-plan="<%= current_user.current_plan.id %>">
+                  <option value="0" <%= selected?(0) %> >0</option>
+                  <option value="1" <%= selected?(1) %> >1</option>
+                  <option value="2" <%= selected?(2) %> >2</option>
+                  <option value="3" <%= selected?(3) %> >3</option>
+                  <option value="4" <%= selected?(4) %> >4</option>
+                  <option value="5" <%= selected?(5) %>>5</option>
+                </select>
+              </div>
+              <% if current_user.check_ins.any? %>
+                <div class="well well-sm sidebar_table">
+                  <ul>
+                    <ul class="list-inline row list_head">
+                      <li class="col-xs-4 text-left">Check-in Date</li>
+                      <li class="col-xs-4 text-center">Check-in Weight</li>
+                      <li class="col-xs-4 text-right">Check-in BMI</li>
+                    </ul>
+                    <div class="sidebar_table_contents">
+                      <% current_user.check_ins.each do |check| %>
+                        <ul class="list-inline row">
+                          <li class="col-xs-4 text-left"><%= check.created_at.strftime("%b %d, %Y") %></li>
+                          <li class="col-xs-4 text-center"><%= check.weight %></li>
+                          <li class="col-xs-4 text-center"><%= check.new_bmi %></li>
+                        </ul>
+                      <% end %>
+                    </div>
+                  </ul>
+                </div>
+                <div class="well well-sm">
+                  <%= line_chart current_user.check_ins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, height: "180px", discrete: true %>
+                </div>
+              <% else %>
+                <h5>Plan Overview:</h5>
+                <div class="well well-sm sidebar-overview">
+                  <p>
+                    <%= current_user.current_plan.overview %>
+                  </p>
+                </div>
+                <br>
+                <h4 class="text-center">Let's Get Started!</h4>
+                <hr>
+              <% end %>
             <% else %>
               <h4>Current Plan: N/A</h4>
               <br>
@@ -98,39 +133,6 @@
               <br>
               <hr>
               <br>
-            <% end %>
-            <% if current_user.check_ins.any? %>
-              <div class="well well-sm sidebar_table">
-                <ul>
-                  <ul class="list-inline row list_head">
-                    <li class="col-xs-4 text-left">Check-in Date</li>
-                    <li class="col-xs-4 text-center">Check-in Weight</li>
-                    <li class="col-xs-4 text-right">Check-in BMI</li>
-                  </ul>
-                  <div class="sidebar_table_contents">
-                    <% current_user.check_ins.each do |check| %>
-                      <ul class="list-inline row">
-                        <li class="col-xs-4 text-left"><%= check.created_at.strftime("%b %d, %Y") %></li>
-                        <li class="col-xs-4 text-center"><%= check.weight %></li>
-                        <li class="col-xs-4 text-center"><%= check.new_bmi %></li>
-                      </ul>
-                    <% end %>
-                  </div>
-                </ul>
-              </div>
-              <div class="well well-sm">
-                <%= line_chart current_user.check_ins.group_by_week(:created_at).sum(:weight), min: nil, max: nil, height: "180px", discrete: true %>
-              </div>
-            <% else %>
-              <h5>Plan Overview:</h5>
-              <div class="well well-sm sidebar-overview">
-                <p>
-                  <%= current_user.current_plan.overview %>
-                </p>
-              </div>
-              <br>
-              <h4 class="text-center">Let's Get Started!</h4>
-              <hr>
             <% end %>
             <div class="row">
               <div class="col-xs-4">
@@ -161,87 +163,89 @@
         </div>
       <% end %>
     </div>
-    <div class="footer-top" id="footer">
-      <div class="container">
-        <div class="col-xs-7">
-          <h3>About Us</h3>
-          <p>
-            Here at LiveDiet we strive for social health.
-            By focusing on a supportive community driven by similar goals we hope to instill the confidence and drive in our users to succeed in whatever journey they find themselves on.
-            A safe community, focused on goals and supporting one another. This is what we strive for.
-          </p>
-        </div>
-        <div class="col-xs-4 col-xs-offset-1">
-          <h3>Contact Us</h3>
-          <p>
-            <div class="row">
-              <div class="col-xs-4">
-                <span class="glyphicon glyphicon-map-marker glyphicon-color"><strong> Address:</strong></span>
+    <div class="footer">
+      <div class="footer-top" id="footer">
+        <div class="container">
+          <div class="col-xs-7">
+            <h3>About Us</h3>
+            <p>
+              Here at LiveDiet we strive for social health.
+              By focusing on a supportive community driven by similar goals we hope to instill the confidence and drive in our users to succeed in whatever journey they find themselves on.
+              A safe community, focused on goals and supporting one another. This is what we strive for.
+            </p>
+          </div>
+          <div class="col-xs-4 col-xs-offset-1">
+            <h3>Contact Us</h3>
+            <p>
+              <div class="row">
+                <div class="col-xs-4">
+                  <span class="glyphicon glyphicon-map-marker glyphicon-color"><strong> Address:</strong></span>
+                </div>
+                <div class="col-xs-8 footer-list">
+                  475 E. Market Street
+                  <br>
+                  Indianapolis, IN 46204
+                </div>
               </div>
-              <div class="col-xs-8 footer-list">
-                475 E. Market Street
-                <br>
-                Indianapolis, IN 46204
+              <div class="row">
+                <div class="col-xs-4">
+                  <span class="glyphicon glyphicon-envelope glyphicon-color"><strong> Email:</strong></span>
+                </div>
+                <div class="col-xs-8 footer-list">
+                  Rittersm@gmail.com
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">
-                <span class="glyphicon glyphicon-envelope glyphicon-color"><strong> Email:</strong></span>
+              <div class="row">
+                <div class="col-xs-4">
+                  <span class="glyphicon glyphicon-earphone glyphicon-color"><strong> Phone:</strong></span>
+                </div>
+                <div class="col-xs-8 footer-list">
+                  (317)260-1521
+                </div>
               </div>
-              <div class="col-xs-8 footer-list">
-                Rittersm@gmail.com
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-4">
-                <span class="glyphicon glyphicon-earphone glyphicon-color"><strong> Phone:</strong></span>
-              </div>
-              <div class="col-xs-8 footer-list">
-                (317)260-1521
-              </div>
-            </div>
-          </p>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="col-xs-8">
-          <ul class="list-inline list-color">
-            <li><h5>Made With:</h5></li>
-            <li>
-              <i class="devicon-rails-plain"></i>
-            </li>
-            <li>
-              <i class="devicon-javascript-plain"></i>
-            </li>
-            <li>
-              <i class="devicon-postgresql-plain"></i>
-            </li>
-            <li>
-              <i class="devicon-html5-plain"></i>
-            </li>
-            <li>
-              <i class="devicon-sass-original"></i>
-            </li>
-            <li>
-              <i class="devicon-bootstrap-plain"></i>
-            </li>
-            <li>
-              <i class="devicon-atom-original"></i>
-            </li>
-          </ul>
-        </div>
-        <div class="col-xs-3">
-          <ul class="list-inline list-color">
-            <li><h5>Find Us:</h5></li>
-            <li>
-              <a href="https://github.com/Rittersm"><i class="devicon-github-plain"></i></a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/sean-ritter-b9b07a2a?trk=hp-identity-name"><i class="fa fa-linkedin-square"></i></a>
-            </li>
-          </ul>
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="col-xs-8">
+            <ul class="list-inline list-color">
+              <li><h5>Made With:</h5></li>
+              <li>
+                <i class="devicon-rails-plain"></i>
+              </li>
+              <li>
+                <i class="devicon-javascript-plain"></i>
+              </li>
+              <li>
+                <i class="devicon-postgresql-plain"></i>
+              </li>
+              <li>
+                <i class="devicon-html5-plain"></i>
+              </li>
+              <li>
+                <i class="devicon-sass-original"></i>
+              </li>
+              <li>
+                <i class="devicon-bootstrap-plain"></i>
+              </li>
+              <li>
+                <i class="devicon-atom-original"></i>
+              </li>
+            </ul>
+          </div>
+          <div class="col-xs-3">
+            <ul class="list-inline list-color">
+              <li><h5>Find Us:</h5></li>
+              <li>
+                <a href="https://github.com/Rittersm"><i class="devicon-github-plain"></i></a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/sean-ritter-b9b07a2a?trk=hp-identity-name"><i class="fa fa-linkedin-square"></i></a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
