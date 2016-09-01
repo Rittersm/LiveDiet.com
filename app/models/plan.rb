@@ -12,7 +12,7 @@ class Plan < ApplicationRecord
 
   def set_rating
     if subscriptions.any?
-      self.rating = (subscriptions.reload.map(&:rating).compact.inject(0){|sum, x| sum + x.value}/subscriptions.count.to_f).round(2)
+      self.rating = (subscriptions.reload.map(&:rating).compact.inject(0){|sum, x| sum + x.value}/subscriptions.reject{|x| x.rating_id == nil}.count.to_f).round(2)
     end
   end
 
@@ -27,7 +27,6 @@ class Plan < ApplicationRecord
       (subscriptions.all.inject(0){|sum, x| sum + x.start_weight}/subscriptions.count.to_f).round(0)
     end
   end
-
 
   def avg_change(x)
     output = {}
@@ -56,7 +55,7 @@ class Plan < ApplicationRecord
   end
 
   def is_subscribed(user)
-    subscriptions.where(user: user).any?
+      user != nil && user.current_plan == self
   end
 
   def user_subscription(user)

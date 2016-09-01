@@ -2,6 +2,7 @@ $(document).ready(function(){
 
   $('#new_check_in').on('submit', function(ev){
     ev.preventDefault()
+    $(this).prev().remove()
     $.post({
         url: $(ev.target).attr('action'),
         data: new FormData(ev.target),
