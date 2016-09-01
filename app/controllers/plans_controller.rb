@@ -45,12 +45,12 @@ class PlansController < ApplicationController
 
   def weight_chart
     plan = Plan.find(params[:id])
-    render json: plan.avg_change(:weight)
+    render json: plan.avg_change(:weight_difference)
   end
 
   def bmi_chart
     plan = Plan.find(params[:id])
-    render json: plan.avg_change(:new_bmi)
+    render json: plan.avg_change(:bmi_difference)
   end
 
   private

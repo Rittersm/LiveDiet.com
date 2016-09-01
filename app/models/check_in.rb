@@ -5,6 +5,7 @@ class CheckIn < ApplicationRecord
   before_save :set_new_bmi
 
   validates :weight, presence: true
+  validates :subscription, presence: true
   validate :week_limit, on: :create
 
   def kg
@@ -19,6 +20,14 @@ class CheckIn < ApplicationRecord
     if user.check_ins.any? && user.check_ins.last.created_at > 7.days.ago
       errors.add(:check_in, "cannot be posted more than once per week")
     end
+  end
+
+  def weight_difference
+    (subscription.start_weight - weight) * -1
+  end
+
+  def bmi_difference
+    (subscription.start_bmi - new_bmi) * -1
   end
 
 end

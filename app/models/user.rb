@@ -3,15 +3,15 @@ class User < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_many :logs, dependent: :destroy
   has_many :check_ins, dependent: :destroy
-  attachment :profile_image
+  attachment :profile_image, type: :image
 
   before_save :starting_bmi
 
   validates :username, presence: true, uniqueness: true, format: {:with => /\A[a-zA-Z0-9\-_]+\z/}
   validates :email, presence: true, uniqueness: true, format: {:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/}
-  validates :feet, presence: true
-  validates :inches, presence: true
-  validates :starting_weight, presence: true
+  validates :feet, presence: true, :numericality => { :greater_than_or_equal_to => 4, :less_than_or_equal_to => 7 }
+  validates :inches, presence: true, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 11 }
+  validates :starting_weight, presence: true, :numericality => { :greater_than_or_equal_to => 75, :less_than_or_equal_to => 900 }
 
   def kg
     starting_weight/2.2046

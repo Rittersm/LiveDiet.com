@@ -10,6 +10,7 @@ class Subscription < ApplicationRecord
   after_save :plan_sub_count
 
   validates :expectations, presence: true
+  validates :plan, presence: true
 
   def plan_set_rating
     plan.set_rating

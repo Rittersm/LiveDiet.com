@@ -3,11 +3,11 @@
     <div class="col-xs-6">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-xs-6">
+          <div class="col-xs-5">
             <%= image_tag attachment_url(subscription.user, :profile_image, :fill, 183, 238, format: "jpg", fallback: "default.png") %>
           </div>
-          <div class="col-xs-6">
-            <a class="col-xs-6" href="/users/<%= subscription.user.id %>">
+          <div class="col-xs-7">
+            <a href="/users/<%= subscription.user.id %>">
               <h2><%= subscription.user.username %></h2>
             </a>
           </div>
