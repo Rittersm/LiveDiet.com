@@ -12,6 +12,8 @@ category = Category.create([
   { title: 'Muscle Mass' }
 ])
 
+
+
 rating = Rating.create([
   { value: 0 },
   { value: 1 },
@@ -21,12 +23,19 @@ rating = Rating.create([
   { value: 5 }
 ])
 
-plan = 50.times.map do
-  Plan.create!(
-  title: Faker::Superhero.name,
-  overview: Faker::Lorem.sentences(10).join("\n\n"),
-  category: category.sample
-  )
+require 'wikipedia'
+
+links = Wikipedia.find('List of diets', prop: 'links', pllimit: 'max').links.select{|x| x.downcase[-4..-1]== "diet"}
+
+links.each do |link|
+  link_page = Wikipedia.find(link)
+  unless link_page.content.nil?
+    Plan.create!(
+      title: link,
+      overview: link_page.summary,
+      category: category.sample
+    )
+  end
 end
 
 100.times.each do
@@ -41,7 +50,7 @@ end
   subscription = Subscription.create!(
     expectations: Faker::Lorem.sentences(6).join("\n\n"),
     user: user,
-    plan: plan.sample,
+    plan: Plan.offset(rand(Plan.count)).first,
     rating: rating.sample
   )
   12.times do |num|

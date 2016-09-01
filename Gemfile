@@ -45,6 +45,7 @@ gem 'refile', github: 'refile/refile', require: 'refile/rails'
 gem 'refile-mini_magick', github: 'refile/refile-mini_magick'
 gem 'sinatra', github: 'sinatra/sinatra', branch: 'master'
 gem 'refile-postgres', '~> 1.4'
+gem 'wikipedia-client', '~> 1.6', '>= 1.6.2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
