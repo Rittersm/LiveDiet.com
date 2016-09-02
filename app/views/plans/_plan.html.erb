@@ -1,14 +1,14 @@
 <div class="well well-lg" id="<%= plan.id %>">
   <div class="row">
-    <div class="col-xs-6">
-      <a class="col-xs-12" href="/plans/<%= plan.id %>">
+    <div class="col-md-6">
+      <a class="col-md-12 plan-title" href="/plans/<%= plan.id %>">
         <h2><%= plan.title %></h2>
       </a>
-      <div class="col-xs-12">
+      <div class="col-md-12">
         <p><%= plan.overview %></p>
       </div>
     </div>
-    <div class="col-xs-6">
+    <div class="col-md-6">
       <% if plan.check_ins.any? %>
         <h4 class="text-center">Average Check-Ins</h4>
         <ul class="nav nav-tabs nav-justified categories" role="tablist">
@@ -32,21 +32,25 @@
   </div>
   <hr>
   <div class="row">
-    <div class="col-xs-4">
+    <div class="col-md-4 col-xs-3">
       <h4>Rating: <%= plan.rating %>/5</h4>
     </div>
-    <div class="col-xs-4">
+    <div class="col-md-4 col-xs-5">
       <h4>Category: <%= plan.category.title %></h4>
     </div>
-    <div class="col-xs-3">
-      <h4>Total Subscribers: <%= plan.subscriptions.count %></h4>
+    <div class="col-sm-3 hidden-xs">
+      <h4>Subscribers: <%= plan.subscriptions.count %></h4>
     </div>
-    <div class="col-xs-1 subbutton">
-        <% if plan.is_subscribed(current_user) %>
-          <a class="btn btn-primary" href="/plans/<%= plan.id %>" role="button">Current Plan</a>
-        <% else %>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SubscribeModal<%= plan.id %>">Subscribe</button>
-        <% end %>
+    <div class="col-xs-4 hidden-sm hidden-md hidden-lg">
+      <h4>Subs: <%= plan.subscriptions.count %></h4>
+    </div>
+    <div class="col-md-1 col-xs-12 subbutton">
+      <hr class="hidden-md hidden-lg">
+      <% if plan.is_subscribed(current_user) %>
+        <a class="btn btn-primary" href="/plans/<%= plan.id %>" role="button">Current Plan</a>
+      <% else %>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SubscribeModal<%= plan.id %>">Subscribe</button>
+      <% end %>
     </div>
   </div>
 </div>

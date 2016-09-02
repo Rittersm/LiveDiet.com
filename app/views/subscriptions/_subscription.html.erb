@@ -1,12 +1,12 @@
 <div class="well well-lg">
   <div class="row">
-    <div class="col-xs-6">
+    <div class="col-md-6">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-xs-5">
+          <div class="col-sm-5 hidden-xs">
             <%= image_tag attachment_url(subscription.user, :profile_image, :fill, 183, 238, format: "jpg", fallback: "default.png") %>
           </div>
-          <div class="col-xs-7">
+          <div class="col-sm-7 col-xs-12">
             <a href="/users/<%= subscription.user.id %>">
               <h2><%= subscription.user.username %></h2>
             </a>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <% if subscription.check_ins.any? %>
-      <div class="col-xs-6">
+      <div class="col-md-6">
         <ul class="nav nav-tabs nav-justified categories" role="tablist">
           <li role="presentation" class="active"><a href="#subweight<%= subscription.id %>" aria-controls="subweight" role="tab" data-toggle="tab">Weight</a></li>
           <li role="presentation"><a href="#subbmi<%= subscription.id %>" aria-controls="subbmi" role="tab" data-toggle="tab">B.M.I</a></li>
@@ -41,28 +41,29 @@
   </div>
   <hr>
   <div class="row">
-    <div class="col-xs-4">
+    <div class="col-sm-4">
       <% if subscription.rating %>
         <h4>Rating: <%= subscription.rating.value %>/5</h4>
       <% else %>
         <h4>Rating: N/A</h4>
       <% end %>
     </div>
-    <div class="col-xs-4">
+    <hr class="visible-xs">
+    <div class="col-sm-4">
       <h4>Starting Weight: <%= subscription.start_weight %></h4>
     </div>
-    <div class="col-xs-3">
+    <div class="col-sm-3">
       <h4>Starting BMI: <%= subscription.start_bmi %></h4>
     </div>
   </div>
-  <div class="col-xs-9 col-xs-offset-3">
+  <div class="col-sm-9 col-sm-offset-3">
     <hr>
   </div>
   <div class="row">
-    <div class="col-xs-4 col-xs-offset-4">
+    <div class="col-sm-4 col-sm-offset-4">
       <h4>Current Weight: <%= subscription.user.current_weight %></h4>
     </div>
-    <div class="col-xs-4">
+    <div class="col-sm-4">
       <h4>Current BMI: <%= subscription.user.current_bmi %></h4>
     </div>
   </div>

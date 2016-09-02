@@ -13,13 +13,13 @@
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
+      <div class="container-fluid main-nav">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/plans">
+          <a class="navbar-brand" href="/">
             <%= image_tag "biglogo.png", class: "img-responsive"%>
           </a>
         </div>
-        <div class="col-xs-10">
+        <div class="col-md-10 hidden-sm hidden-xs">
           <h1 class="text-center">LiveDiet</h1>
         </div>
         <div class="dropdown">
@@ -33,6 +33,9 @@
                 <li><a href=<%= plan_path(current_user.current_plan) %>>Current Plan</a></li>
               <% end %>
               <li><a href=<%= user_path(current_user) %>>Your Profile</a></li>
+              <li class="hidden-md hidden-lg">
+                <a href="#" data-toggle="modal" data-target="#AllChecksModal"><h5>Your Check Ins</h5></a>
+              </li>
               <% if current_user.subscriptions.reject{|x| x.plan.nil?}.any? %>
                 <li class="menu-item dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Your Plans</a>
                   <ul class="dropdown-menu">
@@ -42,6 +45,15 @@
                   </ul>
                 </li>
               <% end %>
+              <li class="hidden-md hidden-lg">
+                <a href="#" data-toggle="modal" data-target="#LogModal"><h5>New Log</h5></a>
+              </li>
+              <li class="hidden-md hidden-lg">
+                <a href="#" data-toggle="modal" data-target="#CheckinModal"><h5>New Check In</h5></a>
+              </li>
+              <li class="hidden-md hidden-lg">
+                <a href="#" data-toggle="modal" data-target="#PlanModal"><h5>Create Plan</h5></a>
+              </li>
               <li><%= link_to "Logout", logout_path, method: :delete %></li>
             </ul>
           <% else %>
@@ -53,21 +65,51 @@
           <% end %>
         </div>
       </div>
+      <div class="container-fluid hidden-md hidden-lg user-nav">
+        <br>
+        <% if current_user %>
+          <ul class="list-inline">
+            <li>
+              <h4>Welcome, <a href=<%= user_path(current_user) %>><%= current_user.username %></a></h4>
+            </li>
+            <li>
+              <h4>Current Plan: <a href=<%= plan_path(current_user.current_plan) %>><%= current_user.current_plan.title %></a></h4>
+            </li>
+          </ul>
+        <% else %>
+          <ul class="list-inline">
+            <li>
+              <h4>Welcome to LiveDiet!</h4>
+            </li>
+            <li>
+              <a href="#" data-toggle="modal" data-target="#LoginModal"><h5>Login</h5></a>
+            </li>
+            <li>
+              <a href="#" data-toggle="modal" data-target="#RegisterModal"><h5>Register</h5></a>
+            </li>
+          </ul>
+        <% end %>
+      </div>
     </nav>
-
+    <br class="hidden-md hidden-lg">
+    <br class="hidden-md hidden-lg">
+    <br class="hidden-md hidden-lg">
+    <br class="hidden-sm hidden-md hidden-lg">
+    <br class="hidden-sm hidden-md hidden-lg">
+    <br class="hidden-sm hidden-md hidden-lg">
     <div class="container-fluid main-body" >
       <% unless @disable_sidebar %>
-        <div class="col-xs-9"><%= yield %></div>
-        <div class="col-xs-3 sidebar" id="sidebar" data-spy="affix" data-offset-top="60" data-offset-bottom="290">
+        <div class="col-md-9"><%= yield %></div>
+        <div class="col-md-3 hidden-sm hidden-xs sidebar" id="sidebar" data-spy="affix" data-offset-top="60" data-offset-bottom="290">
           <% if current_user %>
             <h4 class="text-center">Welcome, <a href=<%= user_path(current_user) %>><%= current_user.username %></a></h4>
             <hr>
             <% if current_user.current_plan %>
               <div class="row">
-                <h4 class="col-xs-12">Current Plan: <a href=<%= plan_path(current_user.current_plan) %>><%= current_user.current_plan.title %></a></h4>
+                <h4 class="col-md-12">Current Plan: <a href=<%= plan_path(current_user.current_plan) %>><%= current_user.current_plan.title %></a></h4>
               </div>
               <div class="row">
-                <h4 class="col-xs-4">Rate Plan:</h4>
+                <h4 class="col-md-4">Rate Plan:</h4>
                 <select id="subscription-rating" data-subscription="<%= current_user.current_subscription.id %>" data-plan="<%= current_user.current_plan.id %>">
                   <option value="0" <%= selected?(0) %> >0</option>
                   <option value="1" <%= selected?(1) %> >1</option>
@@ -81,17 +123,18 @@
                 <div class="well well-sm sidebar_table">
                   <ul>
                     <ul class="list-inline row list_head">
-                      <li class="col-xs-4 text-left">Check-in Date</li>
-                      <li class="col-xs-4 text-center">Check-in Weight</li>
-                      <li class="col-xs-4 text-right">Check-in BMI</li>
+                      <li class="col-md-4 text-left">Check-in Date</li>
+                      <li class="col-md-4 text-center">Check-in Weight</li>
+                      <li class="col-md-4 text-right">Check-in BMI</li>
                     </ul>
                     <div class="sidebar_table_contents">
                       <% current_user.check_ins.each do |check| %>
                         <ul class="list-inline row">
-                          <li class="col-xs-4 text-left"><%= check.created_at.strftime("%b %d, %Y") %></li>
-                          <li class="col-xs-4 text-center"><%= check.weight %></li>
-                          <li class="col-xs-4 text-center"><%= check.new_bmi %></li>
+                          <li class="col-md-4 text-left"><%= check.created_at.strftime("%b %d, %Y") %></li>
+                          <li class="col-md-4 text-center"><%= check.weight %></li>
+                          <li class="col-md-4 text-center"><%= check.new_bmi %></li>
                         </ul>
+                        <hr>
                       <% end %>
                     </div>
                   </ul>
@@ -135,18 +178,18 @@
               <br>
             <% end %>
             <div class="row">
-              <div class="col-xs-4">
+              <div class="col-md-4">
                 <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#PlanModal">Create Plan</button>
               </div>
-              <div class="col-xs-4">
+              <div class="col-md-4">
                 <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#LogModal">Daily Log</button>
               </div>
-              <div class="col-xs-4">
+              <div class="col-md-4">
                 <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#CheckinModal">Check-in</button>
               </div>
             </div>
             <br>
-            <div class="col-xs-10 col-xs-offset-1">
+            <div class="col-md-10 col-md-offset-1">
               <%= button_to "Logout", logout_path, method: :delete, :class => "btn btn-primary btn-block" %>
             </div>
           <% else %>
@@ -158,7 +201,7 @@
           <% end %>
         </div>
       <% else %>
-        <div class="col-xs-12">
+        <div class="col-md-12">
           <%= yield %>
         </div>
       <% end %>
@@ -166,7 +209,7 @@
     <div class="footer">
       <div class="footer-top" id="footer">
         <div class="container">
-          <div class="col-xs-7">
+          <div class="col-md-7 col-sm-6">
             <h3>About Us</h3>
             <p>
               Here at LiveDiet we strive for social health.
@@ -174,32 +217,32 @@
               A safe community, focused on goals and supporting one another. This is what we strive for.
             </p>
           </div>
-          <div class="col-xs-4 col-xs-offset-1">
+          <div class="col-md-4 col-md-offset-1 col-sm-6">
             <h3>Contact Us</h3>
             <p>
               <div class="row">
-                <div class="col-xs-4">
+                <div class="col-md-4 col-sm-4 col-xs-4">
                   <span class="glyphicon glyphicon-map-marker glyphicon-color"><strong> Address:</strong></span>
                 </div>
-                <div class="col-xs-8 footer-list">
-                  475 E. Market Street
-                  <br>
+                <div class="col-md-8 col-sm-6 col-xs-8 footer-list">
+                  475 E. Market Street,
+                  <br class="hidden-xs">
                   Indianapolis, IN 46204
                 </div>
               </div>
               <div class="row">
-                <div class="col-xs-4">
+                <div class="col-md-4 col-sm-4 col-xs-4">
                   <span class="glyphicon glyphicon-envelope glyphicon-color"><strong> Email:</strong></span>
                 </div>
-                <div class="col-xs-8 footer-list">
+                <div class="col-md-8 col-sm-6 col-xs-8 footer-list">
                   Rittersm@gmail.com
                 </div>
               </div>
               <div class="row">
-                <div class="col-xs-4">
+                <div class="col-md-4 col-sm-4 col-xs-4">
                   <span class="glyphicon glyphicon-earphone glyphicon-color"><strong> Phone:</strong></span>
                 </div>
-                <div class="col-xs-8 footer-list">
+                <div class="col-md-8 col-sm-6 col-xs-8 footer-list">
                   (317)260-1521
                 </div>
               </div>
@@ -209,7 +252,7 @@
       </div>
       <div class="footer-bottom">
         <div class="container">
-          <div class="col-xs-8">
+          <div class="col-md-8 col-sm-8">
             <ul class="list-inline list-color">
               <li><h5>Made With:</h5></li>
               <li>
@@ -235,7 +278,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-xs-3">
+          <div class="col-md-3 col-sm-3">
             <ul class="list-inline list-color">
               <li><h5>Find Us:</h5></li>
               <li>
@@ -288,6 +331,34 @@
             </div>
             <div class="modal-body">
               <%= render partial: "check_ins/newcheckin" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="AllChecksModal" tabindex="-1" role="dialog" aria-labelledby="AllChecksModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Your  Check Ins</h4>
+            </div>
+            <div class="modal-body">
+              <ul>
+                <ul class="list-inline row list_head">
+                  <li class="col-md-4 text-left">Check-in Date</li>
+                  <li class="col-md-4 text-center">Check-in Weight</li>
+                  <li class="col-md-4 text-right">Check-in BMI</li>
+                </ul>
+                <div class="sidebar_table_contents">
+                  <% current_user.check_ins.each do |check| %>
+                    <ul class="list-inline row">
+                      <li class="col-md-4 text-left"><%= check.created_at.strftime("%b %d, %Y") %></li>
+                      <li class="col-md-4 text-center"><%= check.weight %></li>
+                      <li class="col-md-4 text-center"><%= check.new_bmi %></li>
+                    </ul>
+                  <% end %>
+                </div>
+              </ul>
             </div>
           </div>
         </div>

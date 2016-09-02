@@ -3,39 +3,42 @@
   <%= render @user %>
 </div>
 <% if @user.check_ins.any? %>
+
   <div class="row">
-    <h2 class="col-xs-5">Check-in Table:</h2>
-    <h2 class="col-xs-5 col-xs-offset-1">Check-in Graphs:</h2>
-  </div>
-  <div class="row">
-    <div class="col-xs-5 well well-lg checkin_well">
-      <ul>
-        <ul class="list-inline row list_head">
-          <li class="col-xs-4 text-left">Check-in Date</li>
-          <li class="col-xs-4 text-center">Check-in Weight</li>
-          <li class="col-xs-4 text-right">Check-in BMI</li>
-        </ul>
-        <% @checkins.each do |check| %>
-          <ul class="list-inline row">
-            <li class="col-xs-4 text-left"><%= check.created_at.strftime("%b %d, %Y") %></li>
-            <li class="col-xs-4 text-center"><%= check.weight %></li>
-            <li class="col-xs-4 text-center"><%= check.new_bmi %></li>
+    <div class="col-md-5 hidden-sm hidden-xs">
+      <h2>Check-in Table:</h2>
+      <div class="well well-lg checkin_well">
+        <ul>
+          <ul class="list-inline row list_head">
+            <li class="col-md-4 text-left">Check-in Date</li>
+            <li class="col-md-4 text-center">Check-in Weight</li>
+            <li class="col-md-4 text-right">Check-in BMI</li>
           </ul>
-        <% end %>
-      </ul>
+          <% @checkins.each do |check| %>
+            <ul class="list-inline row">
+              <li class="col-md-4 text-left"><%= check.created_at.strftime("%b %d, %Y") %></li>
+              <li class="col-md-4 text-center"><%= check.weight %></li>
+              <li class="col-md-4 text-center"><%= check.new_bmi %></li>
+            </ul>
+          <% end %>
+        </ul>
+      </div>
     </div>
-    <div class="col-xs-5 col-xs-offset-1 well well-lg">
-      <ul class="nav nav-tabs nav-justified categories" role="tablist">
-        <li role="presentation" class="active"><a href="#userweight<%= @user.id %>" aria-controls="userweight" role="tab" data-toggle="tab">Weight</a></li>
-        <li role="presentation"><a href="#userbmi<%= @user.id %>" aria-controls="userbmi" role="tab" data-toggle="tab" >B.M.I</a></li>
-      </ul>
-      <div class="chart">
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="userweight<%= @user.id %>">
-            <%= line_chart weight_chart_user_path(@user), min: nil, max: nil, discrete: true %>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="userbmi<%= @user.id %>">
-            <%= line_chart bmi_chart_user_path(@user), min: nil, max: nil, discrete: true %>
+    <div class="col-md-5 col-md-offset-1 col-xs-12">
+      <h2>Check-in Graphs:</h2>
+      <div class="well well-lg">
+        <ul class="nav nav-tabs nav-justified categories" role="tablist">
+          <li role="presentation" class="active"><a href="#userweight<%= @user.id %>" aria-controls="userweight" role="tab" data-toggle="tab">Weight</a></li>
+          <li role="presentation"><a href="#userbmi<%= @user.id %>" aria-controls="userbmi" role="tab" data-toggle="tab" >B.M.I</a></li>
+        </ul>
+        <div class="chart">
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="userweight<%= @user.id %>">
+              <%= line_chart weight_chart_user_path(@user), min: nil, max: nil, discrete: true %>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="userbmi<%= @user.id %>">
+              <%= line_chart bmi_chart_user_path(@user), min: nil, max: nil, discrete: true %>
+            </div>
           </div>
         </div>
       </div>
@@ -48,7 +51,7 @@
 <% end %>
 <br>
 <div class="row">
-  <h2 class="col-xs-5">Logs:</h2>
+  <h2 class="col-md-5">Logs:</h2>
 </div>
 <div id="logs">
   <%= render @logs %>

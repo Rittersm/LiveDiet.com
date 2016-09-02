@@ -16,8 +16,12 @@ $electric_lime: #c6ff00;
   border-bottom: 10px solid $electric_lime;
   font-family: 'Audiowide', cursive;
 }
+
+.main-nav{
+  min-height: 135px;
+}
+
 body {
-  padding-top: 135px;
   background: linear-gradient(
     rgba(#86daff, 0.75),
     rgba(#0964d9, 0.75)
@@ -33,6 +37,7 @@ body {
 
 .navbar-brand img{
   width: 100px;
+  float: left;
 }
 
 .navbar h1{
@@ -65,8 +70,62 @@ body {
   color: $dark_blue;
 }
 
-.dropdown{
-  margin-top: 75px;
+.user-nav{
+  background-color: $usaf_blue;
+  color: $electric_lime;
+  padding-bottom: 10px;
+  border-top: 5px solid $electric_lime;
+}
+
+.user-nav li{
+  padding-right: 70px;
+}
+
+.user-nav li a{
+  color: $electric_lime;
+}
+
+@media (min-width: 768px){
+  .dropdown{
+    margin-top: 75px;
+  }
+}
+@media (min-width: 992px){
+  body{
+    padding-top: 135px;
+  }
+  .subbutton{
+    margin-left: -50px;
+  }
+  .checkin_well{
+    margin-left: 50px;
+  }
+}
+
+@media (max-width: 768px){
+  .nav-justified > li > a, .nav-tabs.nav-justified > li > a {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border-radius: 0px;
+  }
+}
+@media (max-width: 991px){
+  .navbar-fixed-top{
+    position: static
+  }
+  .subbutton{
+    margin-left: 0px;
+  }
+  .subbutton .btn{
+    display: block;
+    width: 100%;
+  }
+  .plan-title{
+    text-align: center;
+  }
+  .welcome-page .container{
+    padding: 0px;
+  }
 }
 
 .dropdown button{
@@ -157,7 +216,6 @@ body {
 .checkin_well{
   height: 350px;
   overflow: scroll;
-  margin-left: 50px;
 }
 
 .list_head{
@@ -192,9 +250,6 @@ body {
   color: $dark_blue;
 }
 
-.subbutton{
-  margin-left: -50px;
-}
 
 .footer-top{
   background-color: $usaf_blue;
@@ -323,4 +378,16 @@ h2 small{
 
 .user-info-well{
   min-height: 258px;
+}
+
+.modal-body ul{
+  width: 100%;
+}
+.modal-body li {
+  float: left;
+  width: 33%;
+}
+
+.carousel-caption h2{
+  color: white;
 }
