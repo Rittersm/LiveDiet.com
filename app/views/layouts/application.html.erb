@@ -72,9 +72,11 @@
             <li>
               <h4>Welcome, <a href=<%= user_path(current_user) %>><%= current_user.username %></a></h4>
             </li>
-            <li>
-              <h4>Current Plan: <a href=<%= plan_path(current_user.current_plan) %>><%= current_user.current_plan.title %></a></h4>
-            </li>
+            <% if current_user.current_plan %>
+              <li>
+                <h4>Current Plan: <a href=<%= plan_path(current_user.current_plan) %>><%= current_user.current_plan.title %></a></h4>
+              </li>
+            <% end %>  
           </ul>
         <% else %>
           <ul class="list-inline">

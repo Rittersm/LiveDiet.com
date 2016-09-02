@@ -69,15 +69,17 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#LoginModal">Login</button>
-  </div>
-  <div class="col-md-6">
-    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#RegisterModal">Register</button>
-  </div>
-  <br class="hidden-sm hidden-xs">
-  <br class="hidden-sm hidden-xs">
-  <div class="col-md-12">
+  <% unless current_user %>
+    <div class="col-md-6">
+      <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#LoginModal">Login</button>
+    </div>
+    <div class="col-md-6">
+      <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#RegisterModal">Register</button>
+    </div>
+    <br class="hidden-sm hidden-xs">
+    <br class="hidden-sm hidden-xs">
+    <div class="col-md-12">
+  <% end %>  
     <a class="btn btn-primary btn-block" href="/plans" role="button">View Plans</a>
   </div>
   <br class="hidden-sm hidden-xs">
