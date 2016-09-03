@@ -85,6 +85,10 @@ body {
   color: $electric_lime;
 }
 
+.user-nav-plan{
+  display: inline;
+}
+
 @media (min-width: 768px){
   .dropdown{
     margin-top: 75px;
@@ -383,6 +387,7 @@ h2 small{
 .modal-body ul{
   width: 100%;
 }
+
 .modal-body li {
   float: left;
   width: 33%;

@@ -74,9 +74,17 @@
             </li>
             <% if current_user.current_plan %>
               <li>
-                <h4>Current Plan: <a href=<%= plan_path(current_user.current_plan) %>><%= current_user.current_plan.title %></a></h4>
+                <h4 class="user-nav-plan">Current Plan: <a href=<%= plan_path(current_user.current_plan) %>><%= current_user.current_plan.title %></a></h4>
+                <select id="subscription-rating" data-subscription="<%= current_user.current_subscription.id %>" data-plan="<%= current_user.current_plan.id %>">
+                  <option value="0" <%= selected?(0) %> >0</option>
+                  <option value="1" <%= selected?(1) %> >1</option>
+                  <option value="2" <%= selected?(2) %> >2</option>
+                  <option value="3" <%= selected?(3) %> >3</option>
+                  <option value="4" <%= selected?(4) %> >4</option>
+                  <option value="5" <%= selected?(5) %>>5</option>
+                </select>
               </li>
-            <% end %>  
+            <% end %>
           </ul>
         <% else %>
           <ul class="list-inline">
