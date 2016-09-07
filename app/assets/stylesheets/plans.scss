@@ -2,19 +2,27 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$dark_blue: #082152;
-$true_blue: #0964D9;
-$usaf_blue: #004B91;
-$sky_blue: #86daff;
-$electric_lime: #c6ff00;
+$dark_blue: #95BF74;
+$usaf_blue: #BBE1C3;
+$true_blue: #FFB56B;
+$sky_blue: #F7EFEF;
+$electric_lime: #3A2E39;
 
+*{
+  font-family: 'Josefin Slab', serif;
+  font-weight: bold;
+}
 
+.well{
+  background-color: $sky_blue !important;
+}
 
 .navbar-fixed-top {
   height: 135px;
   background-color: $dark_blue;
-  border-bottom: 10px solid $electric_lime;
-  font-family: 'Audiowide', cursive;
+  border-bottom: 10px solid $true_blue;
+  font-family: 'Josefin Slab', serif;
+  font-weight: bolder;
 }
 
 .main-nav{
@@ -23,8 +31,8 @@ $electric_lime: #c6ff00;
 
 body {
   background: linear-gradient(
-    rgba(#86daff, 0.75),
-    rgba(#0964d9, 0.75)
+    rgba(#86daff, 0.00),
+    rgba(#0964d9, 0.00)
     ),
     image-url("bg") no-repeat;
   background-size: cover;
@@ -41,7 +49,8 @@ body {
 }
 
 .navbar h1{
-  font-family: 'Audiowide', cursive;
+  font-family: 'Josefin Slab', serif;
+  font-weight: bolder;
   font-size: 60px;
   color: $electric_lime;
   margin: 0 auto;
@@ -156,7 +165,7 @@ body {
 
 .sidebar {
   right: 0;
-  margin-top: 20px;
+  margin-top: 19px;
   margin-bottom: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -250,8 +259,8 @@ body {
 }
 
 .btn:hover{
-  background-color: $electric_lime;
-  color: $dark_blue;
+  background-color: $dark_blue;
+  color: $true_blue;
 }
 
 
@@ -269,7 +278,7 @@ body {
 }
 
 .footer-bottom{
-  border-top: 5px solid $electric_lime;
+  border-top: 5px solid $true_blue;
   background-color: $dark_blue;
   padding-top: 10px;
 }
@@ -309,7 +318,8 @@ h2 small{
 
 .brand-name{
   color: $true_blue;
-  font-family: 'Audiowide', cursive;
+  font-family: 'Josefin Slab', serif;
+  font-weight: bolder;
 }
 
 .dropdown{
@@ -326,8 +336,8 @@ h2 small{
 }
 
 .dropdown-menu li a:hover{
-  background-color: $electric_lime;
-  color: $dark_blue;
+  background-color: $usaf_blue;
+  color: $electric_lime;
 }
 
 .dropdown-submenu{
@@ -341,8 +351,6 @@ h2 small{
   margin-left:-1px;
   border-radius:0 6px 6px 6px;
 }
-
-/*.dropdown-submenu:hover>.dropdown-menu{display:block;}*/
 
 .dropdown-submenu>a:before{
   display:block;content:" ";
@@ -395,4 +403,17 @@ h2 small{
 
 .carousel-caption h2{
   color: white;
+}
+
+#sidebar-toggle{
+  right: 0;
+  margin-top: -10px;
+  position: fixed;
+  background-color: $usaf_blue;
+  color: $electric_lime;
+  border-color: $usaf_blue;
+}
+
+.main-body{
+  padding-top: 10px;
 }

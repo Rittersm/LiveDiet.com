@@ -43,6 +43,11 @@ $(document).ready(function(){
 
     menu.css({ left:newpos })
 
-});
+  });
+
+  $("#sidebar-toggle").click(function(){
+    $("#sidebar").toggle();
+  });
+
 
 })
