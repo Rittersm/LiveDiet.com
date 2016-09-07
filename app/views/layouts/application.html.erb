@@ -109,7 +109,7 @@
     <br class="hidden-sm hidden-md hidden-lg">
     <div class="container-fluid main-body" >
       <% unless @disable_sidebar %>
-        <div class="col-md-9 main-body"><%= yield %></div>
+        <div id="main-body" class="col-md-9"><%= yield %></div>
         <button id="sidebar-toggle">Toggle Sidebar</button><div class="col-md-3 hidden-sm hidden-xs sidebar" id="sidebar" data-spy="affix" data-offset-top="60" data-offset-bottom="290">
           <% if current_user %>
             <h4 class="text-center">Welcome, <a href=<%= user_path(current_user) %>><%= current_user.username %></a></h4>

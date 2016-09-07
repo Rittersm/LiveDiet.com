@@ -47,6 +47,7 @@ $(document).ready(function(){
 
   $("#sidebar-toggle").click(function(){
     $("#sidebar").toggle();
+    $("#main-body").toggleClass("col-md-9 col-md-10 col-md-offset-1");
   });
 
 
