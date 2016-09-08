@@ -4,6 +4,7 @@
     <title>LiveDiet</title>
     <%= csrf_meta_tags %>
 
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/master/devicon.min.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
@@ -110,7 +111,7 @@
     <div class="container-fluid main-body" >
       <% unless @disable_sidebar %>
         <div id="main-body" class="col-md-9"><%= yield %></div>
-        <button id="sidebar-toggle" class="btn btn-primary btn-sm">Toggle Sidebar</button><div class="col-md-3 hidden-sm hidden-xs sidebar" id="sidebar" data-spy="affix" data-offset-top="60" data-offset-bottom="290">
+        <button id="sidebar-toggle" class="btn btn-primary btn-sm">Toggle Sidebar</button><div class="col-md-3 hidden-sm hidden-xs sidebar" id="sidebar" data-spy="affix" data-offset-top="60" data-offset-bottom="310">
           <% if current_user %>
             <h4 class="text-center">Welcome, <a href=<%= user_path(current_user) %>><%= current_user.username %></a></h4>
             <hr>

@@ -9,8 +9,9 @@ $sky_blue: #F7EFEF;
 $electric_lime: #3A2E39;
 
 *{
-  font-family: 'Josefin Slab', serif;
+  font-family: 'Josefin Sans', sans-serif;
   font-weight: bold;
+  font-size: 18px;
 }
 
 .well{
@@ -62,7 +63,7 @@ body {
   border: 2px solid $dark_blue !important;
   background-color: $dark_blue;
   color: $electric_lime;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .nav li.active a:focus,
@@ -158,9 +159,12 @@ body {
   color: $true_blue;
 }
 
-.well {
-  background-color: white;
+.categories a{
+  font-family: 'Josefin Slab', serif;
+  font-weight: bolder;
+  font-size: 24px
 }
+
 
 
 .sidebar {
@@ -416,4 +420,29 @@ h2 small{
 
 .main-body{
   padding-top: 10px;
+}
+
+.pagination > li > a{
+  background-color: $sky_blue;
+  color: $dark_blue;
+}
+
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus{
+  background-color: $usaf_blue;
+  color: $electric_lime;
+}
+
+.pagination > .active > a,
+.pagination > .active > a:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span,
+.pagination > .active > span:hover,
+.pagination > .active > span:focus{
+  background-color: $dark_blue;
+  color: $electric_lime;
 }
