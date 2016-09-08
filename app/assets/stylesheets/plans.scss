@@ -320,10 +320,18 @@ h2 small{
   color: $usaf_blue;
 }
 
-.brand-name{
+.brand-name strong{
   color: $true_blue;
-  font-family: 'Josefin Slab', serif;
-  font-weight: bolder;
+  font-family: 'Josefin Slab', serif !important;
+  font-weight: bolder !important;
+  font-size: 36px !important;
+}
+
+.intro-text strong{
+  color: $true_blue;
+  font-family: 'Josefin Slab', serif !important;
+  font-weight: bolder !important;
+  font-size: 30px !important;
 }
 
 .dropdown{
