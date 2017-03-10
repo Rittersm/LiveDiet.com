@@ -10,6 +10,52 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- Piwik -->
+    <script type="text/javascript">
+
+      var visitor_id;
+      var getVisitor = function() {
+      	  console.log("Get ready to call!");
+      	  visitor_id = this.getVisitorId();
+      	  console.log("After call!");
+      	  console.log("VisitorId: " + visitor_id);
+      	  //writeIFrame();
+      };
+
+      console.log("Ready");
+
+      var _paq = _paq || [];
+      var visitor_id;
+      _paq.push([ getVisitor ]);
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      console.log("Set");
+      (function() {
+    	var u="//drivendata.azurewebsites.net/Analytics/";
+    	_paq.push(['setTrackerUrl', u+'piwik.php']);
+    	_paq.push(['setSiteId', '31']);
+    	var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    	g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  	})();
+
+
+      window.onload = function(){
+	console.log('write iframe...');
+        var link = "https://di.rlcdn.com/458889.html?pdata=piwik%3" +
+visitor_id;
+        console.log("https://di.rlcdn.com/458889.html?pdata=piwik%3" +
+visitor_id);
+        var iframe = document.createElement('iframe');
+          iframe.frameBorder=0;
+          iframe.width=0;
+          iframe.height=0;
+          iframe.id="drivendataiFrame";
+          iframe.setAttribute("src", link);
+          document.body.appendChild(iframe);
+      };
+    </script>
+    <!-- End Piwik Code -->
   </head>
 
   <body>
